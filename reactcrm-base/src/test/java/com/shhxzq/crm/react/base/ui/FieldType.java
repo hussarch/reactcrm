@@ -7,6 +7,6 @@ package com.shhxzq.crm.react.base.ui;
  */
 public enum FieldType {
 	
-	Number,String,Date,DateTime,Select
+	number,string,date,dateTime,select
 
 }

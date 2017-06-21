@@ -1,5 +1,7 @@
 package com.shhxzq.crm.react.base.ui;
 
+import java.util.List;
+
 /**
  * @FieldMetaInfo.java
  * @author XiaoYi(hussarch@126.com)
@@ -14,5 +16,6 @@ public class FieldMetaInfo {
 	private FieldMetaInfo type;
 	private Integer size;
 	private String value;
+	private List<DictMetaInfo> dicts;
 
 }
