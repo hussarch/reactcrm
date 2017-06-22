@@ -34,10 +34,28 @@
               "method": "delete"
             }
 		],
-		"table":{
-		
-		
-		}		
+		"table":[
+		  {
+              "label": "ID",
+              "name": "id",
+              "hidden": true,
+              "type": "number"
+          },
+          {
+              "label": "标题",
+              "name": "title",
+              "hidden": false,
+              "type": "string",
+              "size": 30
+          },
+          {
+              "label": "作者",
+              "name": "author",
+              "hidden": false,
+              "type": "string",
+              "size": 30
+          }
+		]		
 	},
 	"add": {
 	},
