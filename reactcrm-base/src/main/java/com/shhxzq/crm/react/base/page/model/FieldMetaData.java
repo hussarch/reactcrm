@@ -1,22 +1,16 @@
 package com.shhxzq.crm.react.base.page.model;
 
-import java.io.Serializable;
 import java.util.List;
 
-import com.shhxzq.crm.react.base.page.type.FieldType;
+import com.shhxzq.crm.react.base.page.templet.FieldTemplet;
 
 /**
  * @FieldMetaInfo.java
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年6月21日, ©2017 some rights reserved
  */
-public class FieldMetaData implements Serializable{
-	
-	private String title;
-	private String name;
-	private Boolean hidden;
-	private FieldType type;
-	private Integer size;
+public class FieldMetaData extends FieldTemplet{
+
 	private String value;
 	private List<DictMetaData> dicts;
 
