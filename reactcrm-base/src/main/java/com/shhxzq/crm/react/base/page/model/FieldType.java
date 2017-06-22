@@ -1,4 +1,4 @@
-package com.shhxzq.crm.react.base.ui;
+package com.shhxzq.crm.react.base.page.model;
 
 /**
  * @FieldType.java
