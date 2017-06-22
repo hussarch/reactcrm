@@ -13,7 +13,7 @@ public class TableMetaData implements Serializable{
     private String title;
 	private List<FieldMetaData> searchFields;
 	private List<ButtonMetaData> buttons;
-	private List<List<FieldMetaData>> fields;
+	private List<List<FieldMetaData>> fieldList;
 	private Integer totle;
 	private Integer totlePage;
 	private Integer pageNo;

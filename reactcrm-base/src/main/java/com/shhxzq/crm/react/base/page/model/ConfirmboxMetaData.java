@@ -3,6 +3,7 @@
  */
 package com.shhxzq.crm.react.base.page.model;
 
+import java.util.List;
 
 /**
  * @author XiaoYi
@@ -11,6 +12,6 @@ package com.shhxzq.crm.react.base.page.model;
 public class ConfirmboxMetaData {
     
     private String title;
-    
+    private List<FieldMetaData> fields;
     
 }
