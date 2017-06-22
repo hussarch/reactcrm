@@ -1,0 +1,14 @@
+{
+   "common_question":
+   {
+      "opidlist":
+      [
+         "gw_wd_a_common_question",
+         "gw_wd_e_common_question",
+         "gw_wd_d_common_question"
+      ],
+      "text":"常见问题",
+      "multi":true
+   }
+
+}

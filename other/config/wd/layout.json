@@ -1,0 +1,132 @@
+{
+    "common_question": 
+    {
+        "comments": "常见问题",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "常见问题"
+    },
+
+    "common_question_xjb": 
+    {
+        "comments": "华信现金宝",
+        "tableType": "xjb",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "华信现金宝"
+    },
+
+    "common_question_ztb": 
+    {
+        "comments": "涨停宝",
+        "tableType": "ztb",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "涨停宝"
+    },
+
+    "common_question_qyxjb": 
+    {
+        "comments": "企业现金宝",
+        "tableType": "qyxjb",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "企业现金宝"
+    },
+
+    "common_question_zqkh": 
+    {
+        "comments": "证券开户",
+        "tableType": "zqkh",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "证券开户"
+    },
+
+    "common_question_zqyw": 
+    {
+        "comments": "证券业务办理",
+        "tableType": "zqyw",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "证券业务办理"
+    },
+    "common_question_tjjd": 
+    {
+        "comments": "投教基地",
+        "tableType": "tjjd",
+        "comps": 
+        [
+            {
+                "compid": "gw_wd_common_question",
+                "row": "0",
+                "params": 
+                {
+                    
+                }
+            }
+        ],
+
+        "name": "投教基地"
+    }
+}

@@ -1,0 +1,10 @@
+{
+   "common_question":
+   {
+      "listid":"gw_wd_common_question",
+      "name":"common_question",
+      "type":"List",
+      "serviceid":"gw_wd_q_common_question"
+   }
+
+}

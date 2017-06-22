@@ -1,0 +1,30 @@
+{
+   "d_common_question":
+   {
+      "disableclazz":"edit_btn1_gray",
+      "comments":"删除",
+      "function":"delete",
+      "name":"删除",
+      "serviceid":"gw_wd_d_common_question",
+      "clazz":"expand_btn_red"
+   },
+   "a_common_question":
+   {
+      "disableclazz":"edit_btn1_gray",
+      "comments":"常见问题",
+      "function":"add",
+      "name":"增加",
+      "serviceid":"gw_wd_a_common_question",
+      "clazz":"expand_btn_red"
+   },
+   "e_common_question":
+   {
+      "disableclazz":"edit_btn1_gray",
+      "comments":"常见问题",
+      "function":"edit",
+      "name":"修改",
+      "serviceid":"gw_wd_e_common_question",
+      "clazz":"expand_btn_red"
+   }
+
+}

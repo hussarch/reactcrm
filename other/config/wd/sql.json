@@ -1,0 +1,88 @@
+{
+   "common_question":
+   {
+      "sql":"select * from common_question where 1 = 1 @@",
+      "in":
+      [
+         {
+            "name":"question",
+            "column":"question",
+            "title":"问题",
+            "cond":"lrlike"
+         },
+         {
+            "name":"type",
+            "column":"type",
+            "title":"类型",
+            "cond":"=",
+            "hidden":true
+         }
+      ],
+      "entity":"common_question",
+      "out":
+      [
+         {
+            "name":"id",
+            "column":"id",
+            "title":"ID"
+         },
+         {
+            "name":"question",
+            "column":"question",
+            "title":"问题"
+         },
+         {
+            "name":"answer",
+            "column":"answer",
+            "title":"答案"
+         },
+         {
+            "name":"type",
+            "column":"type",
+            "title":"类型"
+         },
+         {
+            "name":"index_num",
+            "column":"index_num",
+            "title":"序号（从小往大）"
+         }
+
+      ]
+
+   },
+   "api_edu_question_answer":
+   {
+      "sql":"select * from common_question where 1 = 1 @@",
+      "in":
+      [
+         {
+            "name":"type",
+            "column":"type",
+            "title":"类型",
+            "cond":"="
+         }
+      ],
+      "entity":"common_question",
+      "out":
+      [
+         {
+            "name":"id",
+            "column":"id",
+            "title":"ID"
+         },
+         {
+            "name":"question",
+            "column":"question",
+            "title":"问题"
+         },
+         {
+            "name":"answer",
+            "column":"answer",
+            "title":"答案"
+         }
+
+      ]
+
+   }
+
+}
