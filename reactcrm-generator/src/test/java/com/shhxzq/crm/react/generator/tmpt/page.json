@@ -20,17 +20,17 @@
 		"button":[
 		   {
               "label": "增加",
-              "action"： "gw_wd_add",
+              "action": "gw_wd_add",
               "method": "add"
             },
              {
               "label": "修改",
-              "action"： "gw_wd_update",
+              "action": "gw_wd_update",
               "method": "update"
             },
             {
               "label": "删除",
-              "action"： "gw_wd_delete",
+              "action": "gw_wd_delete",
               "method": "delete"
             }
 		],
