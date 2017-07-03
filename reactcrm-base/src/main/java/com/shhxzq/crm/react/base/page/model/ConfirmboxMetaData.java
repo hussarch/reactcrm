@@ -13,5 +13,5 @@ public class ConfirmboxMetaData {
     
     private String title;
     private List<FieldMetaData> fields;
-    
+    private List<ButtonMetaData> buttons;
 }
