@@ -1,0 +1,29 @@
+{
+    "title": "查看",
+    "fields": [
+        {
+            "label": "ID",
+            "name": "id",
+            "hidden": true
+        },
+        {
+            "label": "标题",
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "label": "作者",
+            "name": "author",
+            "type": "string",
+            "size": 30
+        }
+    ],
+    "buttons": [
+        {
+            "label": "关闭",
+            "action": "gw_wd_close",
+            "method": "add"
+        }
+    ]
+}
+

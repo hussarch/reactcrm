@@ -1,0 +1,34 @@
+{
+    "title": "修改",
+    "fields": [
+        {
+            "label": "ID",
+            "name": "id",
+            "hidden": true
+        },
+        {
+            "label": "标题",
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "label": "作者",
+            "name": "author",
+            "type": "string",
+            "size": 30
+        }
+    ],
+    "buttons": [
+        {
+            "label": "确定",
+            "action": "gw_wd_update",
+            "method": "add"
+        },
+        {
+            "label": "取消",
+            "action": "gw_wd_close",
+            "method": "delete"
+        }
+    ]
+}
+

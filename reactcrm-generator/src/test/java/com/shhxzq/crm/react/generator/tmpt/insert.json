@@ -1,0 +1,29 @@
+{
+    "title": "增加",
+    "fields": [
+        {
+            "label": "标题",
+            "name": "title",
+            "type": "string"
+        },
+        {
+            "label": "作者",
+            "name": "author",
+            "type": "string",
+            "size": 30
+        }
+    ],
+    "buttons": [
+        {
+            "label": "确定",
+            "action": "gw_wd_add",
+            "method": "add"
+        },
+        {
+            "label": "取消",
+            "action": "gw_wd_close",
+            "method": "delete"
+        }
+    ]
+}
+
