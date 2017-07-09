@@ -5,6 +5,9 @@ package com.shhxzq.crm.react.generator;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年6月22日, ©2017 some rights reserved
  */
-public class Entity2MetaGenerator {
-	
+    
+    
+    
+    
+    
 }

@@ -9,6 +9,7 @@
   </parent>
   <artifactId>reactcrm-base</artifactId>
   <name>reactcrm-base</name>
+  <packaging>pom</packaging>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -38,4 +39,7 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <modules>
+  	<module>?</module>
+  </modules>
 </project>

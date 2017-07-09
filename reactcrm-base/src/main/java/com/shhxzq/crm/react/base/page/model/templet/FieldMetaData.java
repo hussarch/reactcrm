@@ -1,7 +1,6 @@
-package com.shhxzq.crm.react.base.page.model;
+package com.shhxzq.crm.react.base.page.model.templet;
 
 import java.io.Serializable;
-import java.util.List;
 
 import com.shhxzq.crm.react.base.page.type.FieldType;
 
@@ -17,7 +16,5 @@ public class FieldMetaData implements Serializable{
     private Boolean hidden;
     private FieldType type;
     private Integer size;
-	private String value;
-	private List<DictMetaData> dicts;
 
 }

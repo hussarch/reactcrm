@@ -1,0 +1,8 @@
+{
+	"mainPage": "table",
+    "renderedJs": "List.js",
+    "param": {
+    	"type": "tjjd"
+    },
+    "clazz": "com...Class"
+}
