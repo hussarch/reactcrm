@@ -16,6 +16,7 @@ public @interface FieldDesc {
     
     String label();
     String fieldAlias() default "";
+    boolean search() default false;
     boolean reqired() default false;
     boolean hidden() default false;
     int min() default Integer.MIN_VALUE;

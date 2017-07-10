@@ -18,7 +18,7 @@ import com.shhxzq.crm.react.base.page.type.PageType;
 @Target(TYPE)
 public @interface ClazzDesc {
     
-    String name();
+    String title();
     PageType mainPage() default PageType.table;
     String renderedJs() default "List.js";
     String[] params() default {};
