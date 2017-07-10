@@ -6,9 +6,12 @@ import java.util.List;
 
 import com.shhxzq.crm.react.base.page.anotations.ClazzDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
+import com.shhxzq.crm.react.base.page.model.templet.ButtonMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
+import com.shhxzq.crm.react.base.page.model.templet.FieldMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.TableMetaData;
+import com.shhxzq.crm.react.base.page.type.MethodType;
 
 /**
  * @Entity2MetaGenerator.java
@@ -43,9 +46,23 @@ public class Entity2MetaGenerator {
 
     public TableMetaData getTableJson() {
         TableMetaData data = new TableMetaData();
+        data.setTitle(this.title + "列表");
+        data.setButtons(getButtons());
+        data.setColumns(getColumns());
         
-        
-        
+        return data;
+    }
+
+    private List<ButtonMetaData> getButtons() {
+        List<ButtonMetaData> list = new ArrayList<>();
+        list.add(new ButtonMetaData("增加", "add", MethodType.add));
+        list.add(new ButtonMetaData("修改", "update", MethodType.add));
+        list.add(new ButtonMetaData("删除", "delete", MethodType.add));
+        return list;
+    }
+    
+    private List<FieldMetaData> getColumns() {
+        // TODO Auto-generated method stub
         return null;
     }
 

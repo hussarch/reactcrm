@@ -14,6 +14,13 @@ public class ButtonMetaData implements Serializable {
     private String label;
     private String action;
     private MethodType method;
+    
+    public ButtonMetaData(String label, String action, MethodType method){
+        this.label = label;
+        this.action = action;
+        this.method = method;
+    }
+    
 
     public String getLabel() {
         return label;
