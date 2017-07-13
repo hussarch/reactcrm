@@ -11,6 +11,7 @@ import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.FieldMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.TableMetaData;
+import com.shhxzq.crm.react.base.page.type.FieldType;
 import com.shhxzq.crm.react.base.page.type.MethodType;
 
 /**
@@ -62,8 +63,32 @@ public class Entity2MetaGenerator {
     }
     
     private List<FieldMetaData> getColumns() {
+        List<FieldMetaData> list = new ArrayList<>();
+        Field[] fields = sourceClass.getDeclaredFields();
+        FieldMetaData data;
+        for( Field field : fields){
+            FieldDesc fieldDesc = field.getAnnotation(FieldDesc.class);
+            if(fieldDesc != null){
+                data = getFieldMetaData(fieldDesc);
+                data.setName(field.getName());
+                data.setType(getFieldType(field));
+                list.add(data);
+            }
+        }
+        return list;
+    }
+
+    private FieldType getFieldType(Field field) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    private FieldMetaData getFieldMetaData(FieldDesc desc) {
+        FieldMetaData data = new FieldMetaData();
+        data.setLabel(desc.label());
+        data.setHidden(desc.hidden());
+        data.setSize(desc.max());
+        return data;
     }
 
     public ModaldialogMetaData getAddJson() {
