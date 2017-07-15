@@ -1,6 +1,7 @@
 package com.shhxzq.crm.react.generator;
 
 import java.lang.reflect.Field;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.FieldMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.TableMetaData;
-import com.shhxzq.crm.react.base.page.type.FieldType;
 import com.shhxzq.crm.react.base.page.type.MethodType;
 
 /**
@@ -78,8 +78,14 @@ public class Entity2MetaGenerator {
         return list;
     }
 
-    private FieldType getFieldType(Field field) {
-        // TODO Auto-generated method stub
+    private String getFieldType(Field field) {
+        if(field.getClass().isPrimitive()){
+            return field.getClass().getName();
+        }else if(String.class.equals(field.getClass())){
+            return "string";
+        }else if(Date.class.equals(field.getClass())){
+            return "datetime";
+        }
         return null;
     }
 

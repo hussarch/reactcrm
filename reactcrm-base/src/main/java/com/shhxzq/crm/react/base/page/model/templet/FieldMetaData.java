@@ -2,8 +2,6 @@ package com.shhxzq.crm.react.base.page.model.templet;
 
 import java.io.Serializable;
 
-import com.shhxzq.crm.react.base.page.type.FieldType;
-
 /**
  * @FieldMetaInfo.java
  * @author XiaoYi(hussarch@126.com)
@@ -14,7 +12,7 @@ public class FieldMetaData implements Serializable {
     private String label;
     private String name;
     private Boolean hidden;
-    private FieldType type;
+    private String type;
     private Integer size;
 
     public String getLabel() {
@@ -41,11 +39,11 @@ public class FieldMetaData implements Serializable {
         this.hidden = hidden;
     }
 
-    public FieldType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(FieldType type) {
+    public void setType(String type) {
         this.type = type;
     }
 
