@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.shhxzq.crm.react.base.page.type.PageType;
+
 /**
  * @TempletDesc.java
  * @author XiaoYi(hussarch@126.com)
@@ -21,5 +23,7 @@ public @interface FieldDesc {
     boolean hidden() default false;
     int min() default Integer.MIN_VALUE;
     int max() default Integer.MAX_VALUE;
+    PageType[] showIn() default {PageType.table, PageType.add, PageType.update, PageType.view};
+    PageType[] notShowIn() default {};
     
 }

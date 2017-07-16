@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.shhxzq.crm.react.base.page.anotations.ClazzDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
+import com.shhxzq.crm.react.base.page.type.PageType;
 
 /**
  * @DocumentEntity.java
@@ -13,7 +14,7 @@ import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
 @ClazzDesc(title = "文档", params = { "type" })
 public class DocumentEntity {
 
-    @FieldDesc(label = "ID")
+    @FieldDesc(label = "ID", hidden = true)
     private Integer id;
     @FieldDesc(label = "标题", search = true)
     private String title;
@@ -28,8 +29,9 @@ public class DocumentEntity {
     private String author;
     @FieldDesc(label = "发布时间")
     private Date publishedAt;
-    @FieldDesc(label = "内容")
+    @FieldDesc(label = "内容", notShowIn = {PageType.table})
     private String content;
+    
     private Date createdAt;
     private Date updatedAt;
 

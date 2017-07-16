@@ -7,6 +7,6 @@ package com.shhxzq.crm.react.base.page.type;
  */
 public enum PageType {
     
-    add,update,view,table
-    
+    add,update,view,table,search
+   
 }

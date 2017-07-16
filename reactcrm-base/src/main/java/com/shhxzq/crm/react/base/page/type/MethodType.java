@@ -9,6 +9,6 @@ package com.shhxzq.crm.react.base.page.type;
  */
 public enum MethodType {
     
-    add,update,delete,view,search
+    add,update,delete,view,search,close
     
 }
