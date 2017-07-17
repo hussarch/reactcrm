@@ -1,12 +1,6 @@
 package com.shhxzq.crm.react.generator;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
-import com.alibaba.fastjson.JSON;
+import com.shhxzq.crm.react.base.common.utils.CommonFileUtils;
 
 /**
  * @author XiaoYi
@@ -14,21 +8,15 @@ import com.alibaba.fastjson.JSON;
  */
 public class TempletGenerator {
     
-    private String path;
     
-    private boolean write(Object obj, String path, String fileName){
-        String content = JSON.toJSONString(obj, true);
-        File file = new File(path + fileName);
-        file.mkdirs();
-        try(OutputStream os = new FileOutputStream(file)){
-            os.write(content.getBytes());
-            return true;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public static void writeTemplet(Class<?> clazz, String path){
+        Entity2Meta entity2Meta = new Entity2Meta(clazz);
+        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, "conf.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, "table.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, "add.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, "update.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, "view.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, "api.json");
     }
     
     

@@ -9,7 +9,9 @@ import java.util.List;
  * Created on 2017年6月21日, ©2017 some rights reserved
  */
 public class TableMetaData implements Serializable {
-
+    
+    public static final String tmpletName = "table.json";
+    
     private String title;
     private List<FieldMetaData> searchFields;
     private List<ButtonMetaData> buttons;

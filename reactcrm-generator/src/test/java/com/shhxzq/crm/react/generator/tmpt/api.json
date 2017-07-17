@@ -1,0 +1,36 @@
+{
+    "list": {
+        "params": {
+            "type": "tjjd"
+        },
+        "fields": [
+            {
+                "label": "标题",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "label": "作者",
+                "name": "author",
+                "type": "string"
+            }
+        ]
+    },
+    "detail": {
+    	"params": {
+            "id": 12
+        },
+        "fields": [
+            {
+                "label": "标题",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "label": "作者",
+                "name": "author",
+                "type": "string"
+            }
+        ]
+    }
+}

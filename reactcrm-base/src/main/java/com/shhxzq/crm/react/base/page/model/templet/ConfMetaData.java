@@ -1,7 +1,7 @@
 package com.shhxzq.crm.react.base.page.model.templet;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 /**
  * @ConfMetaData.java
@@ -9,6 +9,8 @@ import java.util.Map;
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
 public class ConfMetaData {
+    
+    public static final String tmpletName = "conf.json";
 
     private String mainPage;
     private String renderedJs;
@@ -41,9 +43,9 @@ public class ConfMetaData {
 
     public void addParamName(String name) {
         if (this.params == null) {
-            this.params = new HashMap<>();
+            this.params = new LinkedHashMap<>();
         }
-        this.params.put(name, null);
+        this.params.put(name, "");
     }
 
     public String getClazz() {

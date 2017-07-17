@@ -11,6 +11,10 @@ import java.util.List;
  */
 public class ModaldialogMetaData {
 
+    public static final String tmpletNameAdd = "add.json";
+    public static final String tmpletNameUpate = "update.json";
+    public static final String tmpletNameView = "view.json";
+    
     private String title;
     private List<FieldMetaData> fields;
     private List<ButtonMetaData> buttons;

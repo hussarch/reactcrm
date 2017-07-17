@@ -2,8 +2,10 @@ package com.shhxzq.crm.react.generator.entity;
 
 import java.util.Date;
 
-import com.shhxzq.crm.react.base.page.anotations.ClazzDesc;
+import com.shhxzq.crm.react.base.page.anotations.ApiDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
+import com.shhxzq.crm.react.base.page.anotations.PageDesc;
+import com.shhxzq.crm.react.base.page.type.ApiType;
 import com.shhxzq.crm.react.base.page.type.PageType;
 
 /**
@@ -11,27 +13,31 @@ import com.shhxzq.crm.react.base.page.type.PageType;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-@ClazzDesc(title = "文档", params = { "type" })
+@PageDesc(title = "文档", 
+    params = { "type" }, 
+    hbtEntityClass = "com.xx.Entity")
+@ApiDesc(name = "文档列表", params = { "type" }, type = ApiType.list)
+@ApiDesc(name = "文档详情", params = { "id" }, type = ApiType.detail)
 public class DocumentEntity {
 
-    @FieldDesc(label = "ID", hidden = true)
+    @FieldDesc(label = "ID", hidden = true, notShowIn = {PageType.add}, apiType = {ApiType.list, ApiType.detail})
     private Integer id;
-    @FieldDesc(label = "标题", search = true)
+    @FieldDesc(label = "标题", search = true, max = 100, apiType = {ApiType.list, ApiType.detail})
     private String title;
 
     private String type;
 
-    @FieldDesc(label = "摘要")
+    @FieldDesc(label = "摘要", apiType = {ApiType.list, ApiType.detail})
     private String summary;
-    @FieldDesc(label = "信息来源")
+    @FieldDesc(label = "信息来源", apiType = {ApiType.list, ApiType.detail})
     private String sourceFrom;
-    @FieldDesc(label = "作者", search = true)
+    @FieldDesc(label = "作者", search = true, apiType = {ApiType.list, ApiType.detail})
     private String author;
-    @FieldDesc(label = "发布时间")
+    @FieldDesc(label = "发布时间", apiType = {ApiType.list, ApiType.detail})
     private Date publishedAt;
-    @FieldDesc(label = "内容", notShowIn = {PageType.table})
+    @FieldDesc(label = "内容", notShowIn = {PageType.table}, apiType = {ApiType.detail})
     private String content;
-    
+    @FieldDesc(label = "创建时间", showIn = {}, apiType = {ApiType.list, ApiType.detail})
     private Date createdAt;
     private Date updatedAt;
 

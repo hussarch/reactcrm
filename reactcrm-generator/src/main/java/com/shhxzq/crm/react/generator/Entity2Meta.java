@@ -6,14 +6,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
-import com.shhxzq.crm.react.base.page.anotations.ClazzDesc;
+import org.apache.commons.lang3.StringUtils;
+
+import com.shhxzq.crm.react.base.page.anotations.ApiDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
+import com.shhxzq.crm.react.base.page.anotations.PageDesc;
+import com.shhxzq.crm.react.base.page.model.templet.ApiMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ButtonMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.FieldMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.TableMetaData;
+import com.shhxzq.crm.react.base.page.type.ApiType;
 import com.shhxzq.crm.react.base.page.type.MethodType;
 import com.shhxzq.crm.react.base.page.type.PageType;
 
@@ -42,11 +48,15 @@ public class Entity2Meta {
         buttonMap.put(type, new ButtonMetaData(name, type.name(), type));
     }
 
-    public ConfMetaData getConfJson() {
-        ClazzDesc classDesc = this.sourceClass.getAnnotation(ClazzDesc.class);
+    public ConfMetaData getConfMetaData() {
+        PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);
         this.title = classDesc.title();
         ConfMetaData data = new ConfMetaData();
-        data.setClazz(this.sourceClass.toString());
+        if(StringUtils.isNotBlank(classDesc.hbtEntityClass())){
+            data.setClazz(classDesc.hbtEntityClass());
+        }else{
+            data.setClazz(this.sourceClass.getName());
+        }
         data.setMainPage(classDesc.mainPage().toString());
         data.setRenderedJs(classDesc.renderedJs());
         if(classDesc.params() != null){
@@ -57,12 +67,12 @@ public class Entity2Meta {
         return data;
     }
 
-    public TableMetaData getTableJson() {
+    public TableMetaData getTableMetaData() {
         TableMetaData data = new TableMetaData();
         data.setTitle(this.title + "列表");
-        data.setSearchFields(getFeildMetaDatas(PageType.search));
+        data.setSearchFields(getPageFeildMetaDatas(PageType.search));
         data.setButtons(getButtons(MethodType.add, MethodType.update, MethodType.delete, MethodType.search));
-        data.setColumns(getFeildMetaDatas(PageType.table));
+        data.setColumns(getPageFeildMetaDatas(PageType.table));
         return data;
     }
 
@@ -74,18 +84,30 @@ public class Entity2Meta {
         return list;
     }
     
-    private List<FieldMetaData> getFeildMetaDatas(PageType type) {
+    private List<FieldMetaData> getFeildMetaDatas(FeildMetaFilter filter) {
         List<FieldMetaData> list = new ArrayList<>();
         Field[] fields = sourceClass.getDeclaredFields();
         FieldMetaData data = null;
-        for( Field field : fields){
-            data = getFieldMetaData(field, type);
+        for(Field field : fields){
+            data = filter.getFieldMetaData(field);
             if(data != null){
                 list.add(data);
             }
         }
         return list;
     }
+    
+    private List<FieldMetaData> getPageFeildMetaDatas(PageType type) {
+        return getFeildMetaDatas(new FeildMetaFilter(){
+
+            @Override
+            public FieldMetaData getFieldMetaData(Field field) {
+                return Entity2Meta.this.getFieldMetaData(field, type);
+            }
+            
+        });
+    }
+    
     
     private FieldMetaData getFieldMetaData(Field field, PageType type){
         FieldDesc fieldDesc = field.getAnnotation(FieldDesc.class);
@@ -109,7 +131,7 @@ public class Entity2Meta {
         data.setHidden(desc.hidden());
         data.setName(field.getName());
         data.setType(getFieldType(field));
-        if(PageType.add.equals(type) || PageType.update.equals(type)){
+        if((PageType.add.equals(type) || PageType.update.equals(type)) && Integer.MAX_VALUE - desc.max() != 0){
             data.setSize(desc.max());
         }
         return data;
@@ -149,28 +171,77 @@ public class Entity2Meta {
         return null;
     }
 
-    public ModaldialogMetaData getAddJson() {
+    public ModaldialogMetaData getAddMetaData() {
         ModaldialogMetaData data = new ModaldialogMetaData();
         data.setTitle("增加" + this.title);
-        data.setFields(getFeildMetaDatas(PageType.add));
+        data.setFields(getPageFeildMetaDatas(PageType.add));
         data.setButtons(getButtons(MethodType.add, MethodType.close));
         return data;
     }
 
-    public ModaldialogMetaData getUpdateJson() {
+    public ModaldialogMetaData getUpdateMetaData() {
         ModaldialogMetaData data = new ModaldialogMetaData();
         data.setTitle("修改" + this.title);
-        data.setFields(getFeildMetaDatas(PageType.update));
+        data.setFields(getPageFeildMetaDatas(PageType.update));
         data.setButtons(getButtons(MethodType.update, MethodType.close));
         return data;
     }
 
-    public ModaldialogMetaData getViewJson() {
+    public ModaldialogMetaData getViewMetaData() {
         ModaldialogMetaData data = new ModaldialogMetaData();
         data.setTitle("查看" + this.title);
-        data.setFields(getFeildMetaDatas(PageType.view));
+        data.setFields(getPageFeildMetaDatas(PageType.view));
         data.setButtons(getButtons(MethodType.close));
         return data;
     }
+    
+    public Map<String, ApiMetaData> getApiMetaData(){
+        ApiDesc[] apiDescs = this.sourceClass.getAnnotationsByType(ApiDesc.class);
+        if(apiDescs == null || apiDescs.length == 0){
+            return null;
+        }
+        Map<String, ApiMetaData> map = new LinkedHashMap<>();
+        for(ApiDesc desc : apiDescs){
+            ApiMetaData data = new ApiMetaData();
+            data.setTitle(desc.name());
+            if(desc.params() != null) {
+                for(String name : desc.params()){
+                    data.addParamName(name);
+                }
+            }
+            data.setFields(getApiFields(desc.type()));
+            map.put(desc.type().name(), data);
+        }
+        return map;
+    }
 
+    private List<FieldMetaData> getApiFields(ApiType type) {
+        return getFeildMetaDatas(new FeildMetaFilter(){
+
+            @Override
+            public FieldMetaData getFieldMetaData(Field field) {
+                FieldDesc fieldDesc = field.getAnnotation(FieldDesc.class);
+                if(fieldDesc != null && fieldDesc.apiType() != null && fieldDesc.apiType().length > 0){
+                    for(ApiType set : fieldDesc.apiType()){
+                        if(set.equals(type)){
+                            FieldMetaData data = new FieldMetaData();
+                            data.setLabel(fieldDesc.label());
+                            data.setName(field.getName());
+                            data.setType(getFieldType(field));
+                            return data;
+                        }
+                    }
+                }
+                return null;
+            }
+            
+        });
+    }
+    
+    private interface FeildMetaFilter{
+        
+        FieldMetaData getFieldMetaData(Field field);
+        
+    }
+    
 }

@@ -5,6 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.shhxzq.crm.react.base.page.type.ApiType;
 import com.shhxzq.crm.react.base.page.type.PageType;
 
 /**
@@ -25,5 +26,6 @@ public @interface FieldDesc {
     int max() default Integer.MAX_VALUE;
     PageType[] showIn() default {PageType.table, PageType.add, PageType.update, PageType.view};
     PageType[] notShowIn() default {};
+    ApiType[] apiType() default {ApiType.list, ApiType.detail};
     
 }

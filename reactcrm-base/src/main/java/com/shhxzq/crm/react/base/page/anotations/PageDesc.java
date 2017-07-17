@@ -16,11 +16,11 @@ import com.shhxzq.crm.react.base.page.type.PageType;
  */
 @Retention(RUNTIME)
 @Target(TYPE)
-public @interface ClazzDesc {
+public @interface PageDesc {
     
     String title();
     PageType mainPage() default PageType.table;
     String renderedJs() default "List.js";
     String[] params() default {};
-    
+    String hbtEntityClass() default "";
 }
