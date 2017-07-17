@@ -65,4 +65,59 @@ public class ConfMetaData {
         this.clazz = clazz;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((clazz == null) ? 0 : clazz.hashCode());
+        result = prime * result + ((mainPage == null) ? 0 : mainPage.hashCode());
+        result = prime * result + ((params == null) ? 0 : params.hashCode());
+        result = prime * result + ((renderedJs == null) ? 0 : renderedJs.hashCode());
+        result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ConfMetaData other = (ConfMetaData) obj;
+        if (clazz == null) {
+            if (other.clazz != null)
+                return false;
+        } else if (!clazz.equals(other.clazz))
+            return false;
+        if (mainPage == null) {
+            if (other.mainPage != null)
+                return false;
+        } else if (!mainPage.equals(other.mainPage))
+            return false;
+        if (params == null) {
+            if (other.params != null)
+                return false;
+        } else if (!params.equals(other.params))
+            return false;
+        if (renderedJs == null) {
+            if (other.renderedJs != null)
+                return false;
+        } else if (!renderedJs.equals(other.renderedJs))
+            return false;
+        if (serviceId == null) {
+            if (other.serviceId != null)
+                return false;
+        } else if (!serviceId.equals(other.serviceId))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfMetaData [serviceId=" + serviceId + ", mainPage=" + mainPage + ", renderedJs=" + renderedJs + ", params=" + params + ", clazz="
+                + clazz + "]";
+    }
+
 }

@@ -85,4 +85,77 @@ public class TableMetaData implements Serializable {
         this.pageSize = pageSize;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((buttons == null) ? 0 : buttons.hashCode());
+        result = prime * result + ((columns == null) ? 0 : columns.hashCode());
+        result = prime * result + ((pageNo == null) ? 0 : pageNo.hashCode());
+        result = prime * result + ((pageSize == null) ? 0 : pageSize.hashCode());
+        result = prime * result + ((searchFields == null) ? 0 : searchFields.hashCode());
+        result = prime * result + ((title == null) ? 0 : title.hashCode());
+        result = prime * result + ((totle == null) ? 0 : totle.hashCode());
+        result = prime * result + ((totlePage == null) ? 0 : totlePage.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        TableMetaData other = (TableMetaData) obj;
+        if (buttons == null) {
+            if (other.buttons != null)
+                return false;
+        } else if (!buttons.equals(other.buttons))
+            return false;
+        if (columns == null) {
+            if (other.columns != null)
+                return false;
+        } else if (!columns.equals(other.columns))
+            return false;
+        if (pageNo == null) {
+            if (other.pageNo != null)
+                return false;
+        } else if (!pageNo.equals(other.pageNo))
+            return false;
+        if (pageSize == null) {
+            if (other.pageSize != null)
+                return false;
+        } else if (!pageSize.equals(other.pageSize))
+            return false;
+        if (searchFields == null) {
+            if (other.searchFields != null)
+                return false;
+        } else if (!searchFields.equals(other.searchFields))
+            return false;
+        if (title == null) {
+            if (other.title != null)
+                return false;
+        } else if (!title.equals(other.title))
+            return false;
+        if (totle == null) {
+            if (other.totle != null)
+                return false;
+        } else if (!totle.equals(other.totle))
+            return false;
+        if (totlePage == null) {
+            if (other.totlePage != null)
+                return false;
+        } else if (!totlePage.equals(other.totlePage))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "TableMetaData [title=" + title + ", searchFields=" + searchFields + ", buttons=" + buttons + ", columns=" + columns + ", totle="
+                + totle + ", totlePage=" + totlePage + ", pageNo=" + pageNo + ", pageSize=" + pageSize + "]";
+    }
+
 }
