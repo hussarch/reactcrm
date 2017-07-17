@@ -1,6 +1,7 @@
 package com.shhxzq.crm.react.base.page.model.templet;
 
 import java.util.Map;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 /**
@@ -8,7 +9,7 @@ import java.util.LinkedHashMap;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-public class ConfMetaData {
+public class ConfMetaData implements Serializable{
     
     public static final String tmpletName = "conf.json";
 
