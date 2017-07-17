@@ -9,7 +9,7 @@ import com.shhxzq.crm.react.generator.TempletGenerator;
 public class TempletGeneratorTest {
    
     public static void main(String[] args) {
-        TempletGenerator.writeTemplet(DocumentEntity.class, "/Users/sailor/local/tmp/wd/", false);
+        TempletGenerator.writeTemplet(DocumentEntity.class, "/Users/sailor/local/tmp/wd/", true);
     }
     
 }

@@ -52,6 +52,7 @@ public class Entity2Meta {
         PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);
         this.title = classDesc.title();
         ConfMetaData data = new ConfMetaData();
+        data.setServiceId(classDesc.serviceId());
         if(StringUtils.isNotBlank(classDesc.hbtEntityClass())){
             data.setClazz(classDesc.hbtEntityClass());
         }else{
@@ -203,6 +204,7 @@ public class Entity2Meta {
         Map<String, ApiMetaData> map = new LinkedHashMap<>();
         for(ApiDesc desc : apiDescs){
             ApiMetaData data = new ApiMetaData();
+            data.setServiceId(desc.serviceId());
             data.setTitle(desc.name());
             if(desc.params() != null) {
                 for(String name : desc.params()){

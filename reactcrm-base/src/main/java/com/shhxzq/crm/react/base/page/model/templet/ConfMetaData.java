@@ -12,10 +12,19 @@ public class ConfMetaData {
     
     public static final String tmpletName = "conf.json";
 
+    private String serviceId;
     private String mainPage;
     private String renderedJs;
     private Map<String, String> params;
     private String clazz;
+    
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
 
     public String getMainPage() {
         return mainPage;

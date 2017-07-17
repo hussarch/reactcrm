@@ -11,10 +11,21 @@ import java.util.LinkedHashMap;
  */
 public class ApiMetaData implements Serializable{
     
+    public static final String tmpletName = "api.json";
+    
+    private String serviceId;
     private String title;
     private Map<String, String> params;
     private List<FieldMetaData> fields;
     
+    public String getServiceId() {
+        return serviceId;
+    }
+    
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
     public String getTitle() {
         return title;
     }

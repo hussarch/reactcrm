@@ -18,6 +18,7 @@ import com.shhxzq.crm.react.base.page.type.ApiType;
 @Repeatable(ApiDescs.class)
 public @interface ApiDesc {
     
+    String serviceId();
     String name();
     String[] params() default {};
     ApiType type();

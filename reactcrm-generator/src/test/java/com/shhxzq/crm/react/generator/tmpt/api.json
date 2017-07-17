@@ -1,5 +1,6 @@
 {
   "list": {
+    "serviceId": "docList",
     "title": "文档列表",
     "params": {
       "type": ""
@@ -36,6 +37,7 @@
     ]
   },
   "detail": {
+    "serviceId": "docDetail",
     "title": "文档详情",
     "params": {
       "id": ""

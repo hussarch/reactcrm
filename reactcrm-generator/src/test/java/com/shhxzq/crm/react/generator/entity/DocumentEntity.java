@@ -13,11 +13,11 @@ import com.shhxzq.crm.react.base.page.type.PageType;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-@PageDesc(title = "文档", 
+@PageDesc(serviceId = "tjjd_doc", title = "文档", 
     params = { "type" }, 
     hbtEntityClass = "com.xx.Entity")
-@ApiDesc(name = "文档列表", params = { "type" }, type = ApiType.list)
-@ApiDesc(name = "文档详情", params = { "id" }, type = ApiType.detail)
+@ApiDesc(serviceId = "docList", name = "文档列表", params = { "type" }, type = ApiType.list)
+@ApiDesc(serviceId = "docDetail", name = "文档详情", params = { "id" }, type = ApiType.detail)
 public class DocumentEntity {
 
     @FieldDesc(label = "ID", hidden = true, notShowIn = {PageType.add}, apiType = {ApiType.list, ApiType.detail})

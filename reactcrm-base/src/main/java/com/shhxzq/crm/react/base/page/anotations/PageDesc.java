@@ -18,6 +18,7 @@ import com.shhxzq.crm.react.base.page.type.PageType;
 @Target(TYPE)
 public @interface PageDesc {
     
+    String serviceId();
     String title();
     PageType mainPage() default PageType.table;
     String renderedJs() default "List.js";

@@ -1,7 +1,11 @@
-package com.shhxzq.crm.react.generator;
+package com.shhxzq.crm.react.base.page.templet;
+
+import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.shhxzq.crm.react.base.common.utils.CommonFileUtils;
+import com.shhxzq.crm.react.base.page.model.templet.ApiMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.TableMetaData;
@@ -51,7 +55,10 @@ public class Json2Meta {
         return gson.fromJson(json, ModaldialogMetaData.class);
     }
     
-    
+    public Map<String, ApiMetaData> getApiMetaDataMap(){
+        String json = CommonFileUtils.readFileContent(this.path + ApiMetaData.tmpletName);
+        return gson.fromJson(json, new TypeToken<Map<String, ApiMetaData>>() {}.getType());
+    }
     
     
 }
