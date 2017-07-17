@@ -9,14 +9,14 @@ import com.shhxzq.crm.react.base.common.utils.CommonFileUtils;
 public class TempletGenerator {
     
     
-    public static void writeTemplet(Class<?> clazz, String path){
+    public static void writeTemplet(Class<?> clazz, String path, boolean overWrite){
         Entity2Meta entity2Meta = new Entity2Meta(clazz);
-        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, "conf.json");
-        CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, "table.json");
-        CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, "add.json");
-        CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, "update.json");
-        CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, "view.json");
-        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, "api.json");
+        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, "conf.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, "table.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, "add.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, "update.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, "view.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, "api.json", overWrite);
     }
     
     

@@ -16,11 +16,11 @@ import com.google.gson.GsonBuilder;
  */
 public class CommonFileUtils {
 
-    public static boolean writeJson2File(Object obj, String path, String fileName) {
+    public static boolean writeJson2File(Object obj, String path, String fileName, boolean overWrite) {
         if(obj == null){
             return false;
         }
-        // String content = JSON.toJSONString(obj, true);
+        System.out.println("Start to write the templet file: " + fileName);
         Gson gson = new GsonBuilder().setLenient()// json宽松
                 .enableComplexMapKeySerialization()// 支持Map的key为复杂对象的形式
                 // .serializeNulls() //智能null
@@ -32,14 +32,25 @@ public class CommonFileUtils {
         if (!fp.exists()) {
             fp.mkdirs();
         }
-        try (OutputStream os = new FileOutputStream(new File(path + fileName))) {
+        File jsonFile = new File(path + fileName);
+        if(jsonFile.exists()){
+            if(overWrite){
+                System.out.println("The " + fileName + " exist already, would be overWrited.");
+            }else{
+                System.out.println("The " + fileName + " exist already, would not be overWrited.");
+                return false;
+            }
+        }
+        try (OutputStream os = new FileOutputStream(jsonFile)) {
             os.write(content.getBytes());
+            System.out.println("Done");
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Failed");
         return false;
     }
 
