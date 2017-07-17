@@ -50,7 +50,7 @@ public class Json2Meta {
         return getAddModaldialogMetaData(ModaldialogMetaData.tmpletNameView);
     }
     
-    public ModaldialogMetaData getAddModaldialogMetaData(String fileName){
+    private ModaldialogMetaData getAddModaldialogMetaData(String fileName){
         String json = CommonFileUtils.readFileContent(this.path + fileName);
         return gson.fromJson(json, ModaldialogMetaData.class);
     }
@@ -60,5 +60,5 @@ public class Json2Meta {
         return gson.fromJson(json, new TypeToken<Map<String, ApiMetaData>>() {}.getType());
     }
     
-    
+   
 }
