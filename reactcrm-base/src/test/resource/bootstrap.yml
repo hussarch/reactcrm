@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: base
+server:
+  port: 9090
+
+
+templet:
+	folder: /Users/sailor/local
+
+log:
+	path: /Users/sailor/local/log/react_crm
+

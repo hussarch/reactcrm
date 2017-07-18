@@ -21,7 +21,7 @@ import com.shhxzq.crm.react.base.page.templet.Json2Meta;
 @RequestMapping("/tmplet")
 public class TempletController {
     
-    @Value("templet.folder")
+    @Value("${templet.folder}")
     private String templetFolderPath;
     
     
@@ -38,7 +38,7 @@ public class TempletController {
         }
         Json2Meta json2Meta = new Json2Meta(path);
         if(StringUtils.isNoneBlank(name)){
-            file = new File(path + "/" + name);
+            file = new File(path + "/" + name + ".json");
             if(!file.exists()){
                 return "Wrong path: " + path;
             }
