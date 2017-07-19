@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.shhxzq.crm.react</groupId>
-	<artifactId>reactcrm</artifactId>
+	<groupId>com.shhxzq.dc.scs</groupId>
+	<artifactId>frame</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Archetype - reframe</name>
 	<url>http://maven.apache.org</url>
@@ -21,9 +21,8 @@
 	</properties>
 
 	<modules>
-		<module>generator</module>
-		<module>reactcrm-generator</module>
-		<module>reactcrm-base</module>
+		<module>scs-frame-base</module>
+		<module>scs-frame-cdg</module>
 	</modules>
 
 	<dependencies>

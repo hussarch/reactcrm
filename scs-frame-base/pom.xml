@@ -3,12 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.shhxzq.crm.react</groupId>
-		<artifactId>reactcrm</artifactId>
+		<groupId>com.shhxzq.dc.scs</groupId>
+		<artifactId>frame</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>reactcrm-base</artifactId>
-	<name>reactcrm-base</name>
+	<artifactId>frame-base</artifactId>
+	<name>frame-base</name>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 	<properties>
