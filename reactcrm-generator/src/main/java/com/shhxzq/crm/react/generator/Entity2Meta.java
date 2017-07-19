@@ -4,15 +4,19 @@ import java.lang.reflect.Field;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedHashMap;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.shhxzq.crm.react.base.page.anotations.ApiDesc;
+import com.shhxzq.crm.react.base.page.anotations.DictDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
 import com.shhxzq.crm.react.base.page.anotations.PageDesc;
+import com.shhxzq.crm.react.base.page.model.DictData;
+import com.shhxzq.crm.react.base.page.model.DictMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ApiMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ButtonMetaData;
 import com.shhxzq.crm.react.base.page.model.templet.ConfMetaData;
@@ -131,7 +135,7 @@ public class Entity2Meta {
         data.setLabel(desc.label());
         data.setHidden(desc.hidden());
         data.setName(field.getName());
-        data.setType(getFieldType(field));
+        data.setType(getFieldType(field, type));
         if((PageType.add.equals(type) || PageType.update.equals(type)) && Integer.MAX_VALUE - desc.max() != 0){
             data.setSize(desc.max());
         }
@@ -161,17 +165,32 @@ public class Entity2Meta {
         return false;
     }
 
-    private String getFieldType(Field field) {
+    private String getFieldType(Field field, PageType type) {
+        if(type == null || PageType.table.equals(type) || PageType.view.equals(type)){
+            return "string";
+        }
+        DictDesc dictDesc = field.getAnnotation(DictDesc.class);
+        if(dictDesc != null){
+            if(!dictDesc.dictEnumClass().equals(Object.class) || StringUtils.isNotBlank(dictDesc.dictSql())){
+                if(field.getType().isArray()){
+                    return "multi_select";
+                }else if(List.class.isAssignableFrom(field.getType()) || Set.class.isAssignableFrom(field.getType())){
+                    return "multi_select";
+                }else{
+                    return "select";
+                }
+            }
+        }
         if(field.getClass().isPrimitive()){
             return field.getClass().getName();
-        }else if(String.class.equals(field.getClass())){
-            return "string";
         }else if(Date.class.equals(field.getClass())){
             return "datetime";
+        }else if(String.class.equals(field.getClass())){
+            return "string";
         }
         return null;
     }
-
+    
     public ModaldialogMetaData getAddMetaData() {
         ModaldialogMetaData data = new ModaldialogMetaData();
         data.setTitle("增加" + this.title);
@@ -229,7 +248,6 @@ public class Entity2Meta {
                             FieldMetaData data = new FieldMetaData();
                             data.setLabel(fieldDesc.label());
                             data.setName(field.getName());
-                            data.setType(getFieldType(field));
                             return data;
                         }
                     }
@@ -243,6 +261,41 @@ public class Entity2Meta {
     private interface FeildMetaFilter{
         
         FieldMetaData getFieldMetaData(Field field);
+        
+    }
+    
+    public Map<String, Object> getDicts(){
+        Map<String, Object> dicts = new LinkedHashMap<>();
+        Field[] fields = sourceClass.getDeclaredFields();
+        DictDesc dictDesc = null;
+        for(Field field : fields){
+            dictDesc = field.getAnnotation(DictDesc.class);
+            if(dictDesc != null){
+                if(!dictDesc.dictEnumClass().equals(Object.class)) {
+                    dicts.put(field.getName(), getDictDataList(dictDesc.dictEnumClass()));
+                } else if (StringUtils.isNoneBlank(dictDesc.dictSql())) {
+                    dicts.put(field.getName(), dictDesc.dictSql());
+                }
+            }
+        }
+        if(dicts.isEmpty()){
+            return null;
+        }else{
+            return dicts;
+        }
+    }
+    
+    private <T> List<DictMetaData> getDictDataList(Class<T> clazz){
+        if(DictData.class.isAssignableFrom(clazz)){
+            List<DictMetaData> list = new ArrayList<>();
+            Enum<?>[] enums = (Enum[]) clazz.getEnumConstants();
+            for(Enum<?> item : enums){
+                list.add(new DictMetaData((DictData)item));
+            }
+            return list;
+        }else{
+            throw new RuntimeException(clazz.getName() + " should implements the " + DictData.class.getName());
+        }
         
     }
     

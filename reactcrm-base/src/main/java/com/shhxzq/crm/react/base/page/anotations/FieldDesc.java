@@ -26,6 +26,6 @@ public @interface FieldDesc {
     int max() default Integer.MAX_VALUE;
     PageType[] showIn() default {PageType.table, PageType.add, PageType.update, PageType.view};
     PageType[] notShowIn() default {};
-    ApiType[] apiType() default {ApiType.list, ApiType.detail};
+    ApiType[] apiType() default {};
     
 }

@@ -11,7 +11,17 @@ public class DictMetaData implements Serializable{
 	
 	private String key;
 	private String value;
-    
+
+	public DictMetaData(String key, String value){
+	    this.key = key;
+	    this.value = value;
+	}
+	
+	public DictMetaData(DictData dict){
+        this.key = dict.getLabel();
+        this.value = dict.name();
+    }
+	
     public String getKey() {
         return key;
     }

@@ -3,6 +3,7 @@ package com.shhxzq.crm.react.generator.entity;
 import java.util.Date;
 
 import com.shhxzq.crm.react.base.page.anotations.ApiDesc;
+import com.shhxzq.crm.react.base.page.anotations.DictDesc;
 import com.shhxzq.crm.react.base.page.anotations.FieldDesc;
 import com.shhxzq.crm.react.base.page.anotations.PageDesc;
 import com.shhxzq.crm.react.base.page.type.ApiType;
@@ -29,8 +30,11 @@ public class DocumentEntity {
 
     @FieldDesc(label = "摘要", apiType = {ApiType.list, ApiType.detail})
     private String summary;
+    
     @FieldDesc(label = "信息来源", apiType = {ApiType.list, ApiType.detail})
+    @DictDesc(dictEnumClass = SourceFrom.class)
     private String sourceFrom;
+    
     @FieldDesc(label = "作者", search = true, apiType = {ApiType.list, ApiType.detail})
     private String author;
     @FieldDesc(label = "发布时间", apiType = {ApiType.list, ApiType.detail})

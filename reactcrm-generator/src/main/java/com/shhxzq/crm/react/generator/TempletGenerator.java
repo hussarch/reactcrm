@@ -17,6 +17,7 @@ public class TempletGenerator {
         CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, "update.json", overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, "view.json", overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, "api.json", overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getDicts(), path, "dict.json", overWrite);
     }
     
     
