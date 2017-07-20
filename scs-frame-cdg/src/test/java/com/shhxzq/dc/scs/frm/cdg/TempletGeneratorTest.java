@@ -10,7 +10,8 @@ import com.shhxzq.dc.scs.frm.cdg.entity.DocumentEntity;
 public class TempletGeneratorTest {
    
     public static void main(String[] args) {
-        TempletGenerator.writeTemplet(DocumentEntity.class, "/Users/sailor/local/tmp/wd/", true);
+        String path = "/Users/sailor/git/adapter-data-sys/conf-data/";
+        TempletGenerator.writeTemplet(DocumentEntity.class, path, true);
     }
     
 }

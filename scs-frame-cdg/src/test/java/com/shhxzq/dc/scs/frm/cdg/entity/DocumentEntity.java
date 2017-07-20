@@ -16,7 +16,7 @@ import com.shhxzq.dc.scs.frm.base.page.type.PageType;
  */
 @PageDesc(
     path = {"website", "edu", "doc"},
-    serviceId = "tjjd_doc", title = "文档", 
+    serviceId = "document", title = "文档", 
     params = { "type" }, 
     hbtEntityClass = "com.xx.Entity")
 @ApiDesc(serviceId = "docList", name = "文档列表", params = { "type" }, type = ApiType.list)
