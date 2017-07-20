@@ -18,6 +18,7 @@ import com.shhxzq.dc.scs.frm.base.page.type.PageType;
 @Target(TYPE)
 public @interface PageDesc {
     
+    String[] path();
     String serviceId();
     String title();
     PageType mainPage() default PageType.table;

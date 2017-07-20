@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class DictMetaData implements Serializable{
 	
+    public static final String tmpletName = "dict.json";
+    
 	private String key;
 	private String value;
 

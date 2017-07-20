@@ -51,6 +51,19 @@ public class Entity2Meta {
     private void initButtonMetaData(MethodType type, String name){
         buttonMap.put(type, new ButtonMetaData(name, type.name(), type));
     }
+    
+    public String getSubPath(){
+        PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);
+        String[] path = classDesc.path();
+        if(path == null || path.length == 0){
+            return "";
+        }
+        StringBuilder builder = new StringBuilder();
+        for(String item : path){
+            builder.append(item).append("/");   
+        }
+        return builder.toString();
+    }
 
     public ConfMetaData getConfMetaData() {
         PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);

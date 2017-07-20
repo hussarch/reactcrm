@@ -14,7 +14,9 @@ import com.shhxzq.dc.scs.frm.base.page.type.PageType;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-@PageDesc(serviceId = "tjjd_doc", title = "文档", 
+@PageDesc(
+    path = {"website", "edu", "doc"},
+    serviceId = "tjjd_doc", title = "文档", 
     params = { "type" }, 
     hbtEntityClass = "com.xx.Entity")
 @ApiDesc(serviceId = "docList", name = "文档列表", params = { "type" }, type = ApiType.list)
