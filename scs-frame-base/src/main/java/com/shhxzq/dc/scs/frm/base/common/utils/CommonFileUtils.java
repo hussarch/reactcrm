@@ -29,10 +29,6 @@ public class CommonFileUtils {
                 .disableHtmlEscaping() // 默认是GSON把HTML 转义的
                 .create();
         String content = gson.toJson(obj);
-        File fp = new File(path);
-        if (!fp.exists()) {
-            fp.mkdirs();
-        }
         File jsonFile = new File(path + fileName);
         if(jsonFile.exists()){
             if(overWrite){

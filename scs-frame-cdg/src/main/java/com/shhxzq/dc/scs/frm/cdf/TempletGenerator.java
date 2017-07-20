@@ -1,5 +1,7 @@
 package com.shhxzq.dc.scs.frm.cdf;
 
+import java.io.File;
+
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
 import com.shhxzq.dc.scs.frm.base.page.model.DictMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
@@ -17,6 +19,14 @@ public class TempletGenerator {
     public static void writeTemplet(Class<?> clazz, String path, boolean overWrite){
         Entity2Meta entity2Meta = new Entity2Meta(clazz);
         path = path + entity2Meta.getSubPath();
+        File fp = new File(path);
+        if (!fp.exists()) {
+            fp.mkdirs();
+        }else {
+            if(!overWrite){
+                throw new RuntimeException(String.format("The conf folder[%s] exist already, would not create.", path));
+            }
+        }
         CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfMetaData.tmpletName, overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, TableMetaData.tmpletName, overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, ModaldialogMetaData.tmpletNameAdd, overWrite);

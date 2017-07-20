@@ -56,7 +56,7 @@ public class Entity2Meta {
         PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);
         String[] path = classDesc.path();
         if(path == null || path.length == 0){
-            return "";
+            throw new RuntimeException("The page path should be assigned");
         }
         StringBuilder builder = new StringBuilder();
         for(String item : path){
