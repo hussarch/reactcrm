@@ -5,10 +5,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.shhxzq.dc.scs</groupId>
-		<artifactId>frame</artifactId>
+		<artifactId>scs-frame</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>frame-cdg</artifactId>
+	<artifactId>scs-frame-cdg</artifactId>
 	<name>frame-conf-data-generator</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -23,7 +23,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.shhxzq.dc.scs</groupId>
-			<artifactId>frame-base</artifactId>
+			<artifactId>scs-frame-base</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>

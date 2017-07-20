@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.shhxzq.dc.scs</groupId>
-		<artifactId>frame</artifactId>
+		<artifactId>scs-frame</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>frame-base</artifactId>
-	<name>frame-base</name>
-	<packaging>pom</packaging>
+	<artifactId>scs-frame-base</artifactId>
+	<name>scs-frame-base</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
