@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frm.base.page.model;
+package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
 
 /**

@@ -1,16 +1,12 @@
-package com.shhxzq.dc.scs.frm.base.page.model;
-
-import java.io.Serializable;
+package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
 /**
  * @DictMetaInfo.java
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年6月22日, ©2017 some rights reserved
  */
-public class DictMetaData implements Serializable{
+public class DictMetaData extends BaseMetaData{
 	
-    public static final String tmpletName = "dict.json";
-    
 	private String key;
 	private String value;
 

@@ -3,11 +3,7 @@ package com.shhxzq.dc.scs.frm.cdf;
 import java.io.File;
 
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
-import com.shhxzq.dc.scs.frm.base.page.model.DictMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ConfMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.TableMetaData;
+import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
 
 /**
  * @author XiaoYi
@@ -27,13 +23,13 @@ public class TempletGenerator {
                 throw new RuntimeException(String.format("The conf folder[%s] exist already, would not create.", path));
             }
         }
-        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfMetaData.tmpletName, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, TableMetaData.tmpletName, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, ModaldialogMetaData.tmpletNameAdd, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, ModaldialogMetaData.tmpletNameUpate, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, ModaldialogMetaData.tmpletNameView, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, ApiMetaData.tmpletName, overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getDicts(), path, DictMetaData.tmpletName, overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfFileType.global.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, ConfFileType.table.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, ConfFileType.add.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, ConfFileType.update.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getViewMetaData(), path, ConfFileType.view.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, ConfFileType.api.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getDicts(), path, ConfFileType.dict.getFileName(), overWrite);
     }
     
     

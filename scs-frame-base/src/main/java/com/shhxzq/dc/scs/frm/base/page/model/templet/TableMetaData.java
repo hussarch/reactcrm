@@ -1,6 +1,5 @@
 package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,9 +7,7 @@ import java.util.List;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年6月21日, ©2017 some rights reserved
  */
-public class TableMetaData implements Serializable {
-    
-    public static final String tmpletName = "table.json";
+public class TableMetaData extends BaseMetaData {
     
     private String title;
     private List<FieldMetaData> searchFields;

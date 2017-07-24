@@ -52,7 +52,14 @@ public class CommonFileUtils {
     }
 
     public static String readFileContent(String fileName) {
-        try (BufferedReader bf = new BufferedReader(new FileReader(new File(fileName)));) {
+        return readFileContent(new File(fileName));
+    }
+    
+    public static String readFileContent(File file) {
+        if(file == null || !file.exists()){
+            return null;
+        }
+        try (BufferedReader bf = new BufferedReader(new FileReader(file));) {
             String content = "";
             StringBuilder sb = new StringBuilder();
             while (content != null) {
@@ -71,5 +78,4 @@ public class CommonFileUtils {
         }
         return null;
     }
-
 }

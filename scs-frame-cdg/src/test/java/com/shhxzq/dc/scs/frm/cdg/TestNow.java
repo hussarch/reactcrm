@@ -1,6 +1,6 @@
 package com.shhxzq.dc.scs.frm.cdg;
 
-import com.shhxzq.dc.scs.frm.base.page.model.DictData;
+import com.shhxzq.dc.scs.frm.base.page.model.templet.DictData;
 import com.shhxzq.dc.scs.frm.cdg.entity.SourceFrom;
 
 /**

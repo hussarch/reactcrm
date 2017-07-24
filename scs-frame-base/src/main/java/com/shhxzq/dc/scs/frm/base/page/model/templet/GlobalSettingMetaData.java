@@ -1,18 +1,15 @@
 package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
-import java.util.Map;
-import java.io.Serializable;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @ConfMetaData.java
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-public class ConfMetaData implements Serializable{
+public class GlobalSettingMetaData extends BaseMetaData{
     
-    public static final String tmpletName = "conf.json";
-
     private String serviceId;
     private String mainPage;
     private String renderedJs;
@@ -86,7 +83,7 @@ public class ConfMetaData implements Serializable{
             return false;
         if (getClass() != obj.getClass())
             return false;
-        ConfMetaData other = (ConfMetaData) obj;
+        GlobalSettingMetaData other = (GlobalSettingMetaData) obj;
         if (clazz == null) {
             if (other.clazz != null)
                 return false;

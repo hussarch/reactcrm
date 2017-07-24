@@ -3,19 +3,14 @@
  */
 package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author XiaoYi
  * Created on 2017-06-22 17:55:06
  */
-public class ModaldialogMetaData implements Serializable{
+public class ModaldialogMetaData extends BaseMetaData{
 
-    public static final String tmpletNameAdd = "add.json";
-    public static final String tmpletNameUpate = "update.json";
-    public static final String tmpletNameView = "view.json";
-    
     private String title;
     private List<FieldMetaData> fields;
     private List<ButtonMetaData> buttons;

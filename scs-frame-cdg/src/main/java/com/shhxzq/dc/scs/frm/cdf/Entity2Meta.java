@@ -15,11 +15,11 @@ import com.shhxzq.dc.scs.frm.base.page.anotations.ApiDesc;
 import com.shhxzq.dc.scs.frm.base.page.anotations.DictDesc;
 import com.shhxzq.dc.scs.frm.base.page.anotations.FieldDesc;
 import com.shhxzq.dc.scs.frm.base.page.anotations.PageDesc;
-import com.shhxzq.dc.scs.frm.base.page.model.DictData;
-import com.shhxzq.dc.scs.frm.base.page.model.DictMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ButtonMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ConfMetaData;
+import com.shhxzq.dc.scs.frm.base.page.model.templet.GlobalSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.page.model.templet.DictData;
+import com.shhxzq.dc.scs.frm.base.page.model.templet.DictMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.FieldMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.TableMetaData;
@@ -65,10 +65,10 @@ public class Entity2Meta {
         return builder.toString();
     }
 
-    public ConfMetaData getConfMetaData() {
+    public GlobalSettingMetaData getConfMetaData() {
         PageDesc classDesc = this.sourceClass.getAnnotation(PageDesc.class);
         this.title = classDesc.title();
-        ConfMetaData data = new ConfMetaData();
+        GlobalSettingMetaData data = new GlobalSettingMetaData();
         data.setServiceId(classDesc.serviceId());
         if(StringUtils.isNotBlank(classDesc.hbtEntityClass())){
             data.setClazz(classDesc.hbtEntityClass());

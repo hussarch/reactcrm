@@ -6,9 +6,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ConfMetaData;
+import com.shhxzq.dc.scs.frm.base.page.model.templet.GlobalSettingMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.TableMetaData;
+import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
 
 /**
  * @author XiaoYi
@@ -28,35 +29,35 @@ public class Json2Meta {
         gson = new Gson();
     }
     
-    public ConfMetaData getConfMetaData(){
-        String json = CommonFileUtils.readFileContent(this.path + ConfMetaData.tmpletName);
-        return gson.fromJson(json, ConfMetaData.class);
+    public GlobalSettingMetaData getConfMetaData(){
+        String json = CommonFileUtils.readFileContent(this.path + ConfFileType.global.getFileName());
+        return gson.fromJson(json, GlobalSettingMetaData.class);
     }
     
     public TableMetaData getTableMetaData(){
-        String json = CommonFileUtils.readFileContent(this.path + TableMetaData.tmpletName);
+        String json = CommonFileUtils.readFileContent(this.path + ConfFileType.table.getFileName());
         return gson.fromJson(json, TableMetaData.class);
     }
     
     public ModaldialogMetaData getAddModaldialogMetaData(){
-        return getAddModaldialogMetaData(ModaldialogMetaData.tmpletNameAdd);
+        return getAddModaldialogMetaData(ConfFileType.add);
     }
     
     public ModaldialogMetaData getUpdateModaldialogMetaData(){
-        return getAddModaldialogMetaData(ModaldialogMetaData.tmpletNameUpate);
+        return getAddModaldialogMetaData(ConfFileType.update);
     }
     
     public ModaldialogMetaData getViewModaldialogMetaData(){
-        return getAddModaldialogMetaData(ModaldialogMetaData.tmpletNameView);
+        return getAddModaldialogMetaData(ConfFileType.view);
     }
     
-    private ModaldialogMetaData getAddModaldialogMetaData(String fileName){
-        String json = CommonFileUtils.readFileContent(this.path + fileName);
+    private ModaldialogMetaData getAddModaldialogMetaData(ConfFileType type){
+        String json = CommonFileUtils.readFileContent(this.path + type.getFileName());
         return gson.fromJson(json, ModaldialogMetaData.class);
     }
     
     public Map<String, ApiMetaData> getApiMetaDataMap(){
-        String json = CommonFileUtils.readFileContent(this.path + ApiMetaData.tmpletName);
+        String json = CommonFileUtils.readFileContent(this.path + ConfFileType.api.getFileName());
         return gson.fromJson(json, new TypeToken<Map<String, ApiMetaData>>() {}.getType());
     }
     

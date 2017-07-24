@@ -1,17 +1,14 @@
 package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
-import java.io.Serializable;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.LinkedHashMap;
 
 /**
  * @author XiaoYi
  * Created on 2017-07-16 22:10:36
  */
-public class ApiMetaData implements Serializable{
-    
-    public static final String tmpletName = "api.json";
+public class ApiMetaData extends BaseMetaData{
     
     private String serviceId;
     private String title;
@@ -104,5 +101,6 @@ public class ApiMetaData implements Serializable{
     public String toString() {
         return "ApiMetaData [serviceId=" + serviceId + ", title=" + title + ", params=" + params + ", fields=" + fields + "]";
     }
+
     
 }

@@ -1,7 +1,5 @@
 package com.shhxzq.dc.scs.frm.base.page.model.templet;
 
-import java.io.Serializable;
-
 import com.shhxzq.dc.scs.frm.base.page.type.MethodType;
 
 /**
@@ -9,7 +7,7 @@ import com.shhxzq.dc.scs.frm.base.page.type.MethodType;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年6月21日, ©2017 some rights reserved
  */
-public class ButtonMetaData implements Serializable {
+public class ButtonMetaData extends BaseMetaData{
 
     private String label;
     private String action;
@@ -87,5 +85,5 @@ public class ButtonMetaData implements Serializable {
     public String toString() {
         return "ButtonMetaData [label=" + label + ", action=" + action + ", method=" + method + "]";
     }
-
+    
 }
