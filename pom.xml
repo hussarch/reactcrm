@@ -25,6 +25,7 @@
 		<module>scs-frame-base</module>
 		<module>scs-frame-cdg</module>
     <module>scs-frame-cdcache</module>
+    <module>scs-frame-service</module>
   </modules>
 
 	<dependencies>
