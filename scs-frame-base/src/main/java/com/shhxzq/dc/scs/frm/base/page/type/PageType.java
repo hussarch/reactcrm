@@ -8,5 +8,5 @@ package com.shhxzq.dc.scs.frm.base.page.type;
 public enum PageType {
     
     add,update,view,table,search
-   
+    
 }
