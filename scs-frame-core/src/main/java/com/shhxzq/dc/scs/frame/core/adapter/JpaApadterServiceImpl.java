@@ -98,4 +98,10 @@ public class JpaApadterServiceImpl implements JpaApadterService{
         return new FieldTypeValue(feildType, feildValue);
     }
     
+    @Override
+    public void delete(Class<?> clazz, Integer primaryKey){
+        entityJpaService.delete(clazz, primaryKey);
+    }
+    
+    
 }

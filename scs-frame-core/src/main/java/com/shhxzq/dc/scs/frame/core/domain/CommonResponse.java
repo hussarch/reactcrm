@@ -13,6 +13,14 @@ public class CommonResponse<T>{
     
     private String msg;
     
+    public CommonResponse(boolean success, String msg){
+        this.setMsg(success, msg);
+    }
+    
+    public CommonResponse(boolean success, T content){
+        this.setContent(success, content);
+    }
+    
     public Boolean getSuccess() {
         return success;
     }
@@ -21,12 +29,15 @@ public class CommonResponse<T>{
     public void setSuccess(Boolean success) {
         this.success = success;
     }
-
     
     public T getContent() {
         return content;
     }
-
+    
+    public void setContent(boolean success, T content) {
+        this.success = success;
+        this.content = content;
+    }
     
     public void setContent(T content) {
         this.content = content;
@@ -37,6 +48,10 @@ public class CommonResponse<T>{
         return msg;
     }
 
+    public void setMsg(boolean success, String msg) {
+        this.success = success;
+        this.msg = msg;
+    }
     
     public void setMsg(String msg) {
         this.msg = msg;

@@ -22,4 +22,6 @@ public interface JpaApadterService {
 
     void add(Class<?> clazz, String json);
 
+    void delete(Class<?> clazz, Integer primaryKey);
+
 }

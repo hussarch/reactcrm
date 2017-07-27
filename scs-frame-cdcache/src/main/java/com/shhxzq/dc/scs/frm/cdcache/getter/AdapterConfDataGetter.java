@@ -17,6 +17,7 @@ public abstract class AdapterConfDataGetter {
 
     private Map<String, ConfDataMetaData> confDataMetaDataMap = new ConcurrentHashMap<>();
     
+    
     public ConfDataMetaData getConfDataMetaData(String pathName){
         ConfDataMetaData data = confDataMetaDataMap.get(pathName);
         if(data == null){
@@ -31,4 +32,15 @@ public abstract class AdapterConfDataGetter {
     }
 
     public abstract ConfDataMetaData get(String pathName);
+    
+    
+    public Class<?> getEntityClass(String className){
+        try {
+            return Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            logger.error("Can not find the class: " + className, e);
+        }
+        return null;
+    }
+    
 }
