@@ -13,6 +13,9 @@ public class CommonResponse<T>{
     
     private String msg;
     
+    public CommonResponse(){
+    }
+    
     public CommonResponse(boolean success, String msg){
         this.setMsg(success, msg);
     }

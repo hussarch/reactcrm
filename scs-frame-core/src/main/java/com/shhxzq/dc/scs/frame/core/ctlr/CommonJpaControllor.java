@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.shhxzq.dc.scs.frame.core.adapter.JpaApadterService;
 import com.shhxzq.dc.scs.frame.core.domain.CommonResponse;
 import com.shhxzq.dc.scs.frame.core.domain.ModaldialogInfo;
+import com.shhxzq.dc.scs.frame.core.domain.TablePageInfo;
 import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
 import com.shhxzq.dc.scs.frm.base.page.type.PageType;
 import com.shhxzq.dc.scs.frm.cdcache.getter.AdapterConfDataGetter;
@@ -79,14 +80,19 @@ public class CommonJpaControllor {
     
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResponse<Page<?>> getPage(String serviceId, int pageNo, int size, Map<String, String> params){
+    public CommonResponse<TablePageInfo> getPage(String serviceId, int pageNo, int size, Map<String, String> params){
         ConfDataMetaData confData = adapterConfDataGetter.get(serviceId);
         if(confData == null){
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
         }
+        CommonResponse<TablePageInfo> response = new CommonResponse<>();
+        TablePageInfo table = new TablePageInfo();
+        table.setDefine(confData.getTable());
         Pageable pageable = new PageRequest(pageNo - 1, size);
         Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), pageable, params);
-        return new CommonResponse<>(true, page);
+        table.setPage(page);
+        response.setContent(true, table);
+        return response;
     }
 
 }
