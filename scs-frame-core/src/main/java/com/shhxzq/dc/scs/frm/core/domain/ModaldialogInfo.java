@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.domain;
+package com.shhxzq.dc.scs.frm.core.domain;
 
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
 

@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.ctlr;
+package com.shhxzq.dc.scs.frm.core.ctlr;
 
 import java.util.Map;
 
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shhxzq.dc.scs.frame.core.adapter.JpaApadterService;
-import com.shhxzq.dc.scs.frame.core.domain.CommonResponse;
-import com.shhxzq.dc.scs.frame.core.domain.ModaldialogInfo;
-import com.shhxzq.dc.scs.frame.core.domain.TablePageInfo;
+import com.shhxzq.dc.scs.frm.core.adapter.JpaApadterService;
+import com.shhxzq.dc.scs.frm.core.domain.CommonResponse;
+import com.shhxzq.dc.scs.frm.core.domain.ModaldialogInfo;
+import com.shhxzq.dc.scs.frm.core.domain.TablePageInfo;
 import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
 import com.shhxzq.dc.scs.frm.base.page.type.PageType;
 import com.shhxzq.dc.scs.frm.cdcache.getter.AdapterConfDataGetter;

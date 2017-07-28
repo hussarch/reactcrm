@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.adapter;
+package com.shhxzq.dc.scs.frm.core.adapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,8 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.shhxzq.dc.scs.frame.core.jpa.EntityJpaService;
-import com.shhxzq.dc.scs.frame.core.jpa.model.FieldTypeValue;
+import com.shhxzq.dc.scs.frm.core.jpa.EntityJpaService;
+import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
 
 /**
  * @author XiaoYi

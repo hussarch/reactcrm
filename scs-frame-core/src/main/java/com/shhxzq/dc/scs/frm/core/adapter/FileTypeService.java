@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.adapter;
+package com.shhxzq.dc.scs.frm.core.adapter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

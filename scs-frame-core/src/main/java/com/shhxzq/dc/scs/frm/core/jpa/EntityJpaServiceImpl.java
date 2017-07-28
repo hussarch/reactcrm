@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.jpa;
+package com.shhxzq.dc.scs.frm.core.jpa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.shhxzq.dc.scs.frame.core.jpa.model.FieldTypeValue;
+import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
 
 /**
  * @author XiaoYi

@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core;
+package com.shhxzq.dc.scs.frm.core;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

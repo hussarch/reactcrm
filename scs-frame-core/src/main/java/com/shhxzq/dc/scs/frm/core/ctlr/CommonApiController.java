@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.ctlr;
+package com.shhxzq.dc.scs.frm.core.ctlr;
 
 import java.util.Iterator;
 import java.util.List;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.shhxzq.dc.scs.frame.core.adapter.JpaApadterService;
-import com.shhxzq.dc.scs.frame.core.domain.CommonResponse;
+import com.shhxzq.dc.scs.frm.core.adapter.JpaApadterService;
+import com.shhxzq.dc.scs.frm.core.domain.CommonResponse;
 import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
 import com.shhxzq.dc.scs.frm.base.page.model.templet.FieldMetaData;

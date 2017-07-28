@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.jpa;
+package com.shhxzq.dc.scs.frm.core.jpa;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.shhxzq.dc.scs.frame.core.jpa.model.FieldTypeValue;
+import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
 
 /**
  * @author XiaoYi Created on 2017-07-26 09:44:10

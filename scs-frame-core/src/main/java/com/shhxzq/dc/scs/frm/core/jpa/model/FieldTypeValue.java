@@ -1,4 +1,4 @@
-package com.shhxzq.dc.scs.frame.core.jpa.model;
+package com.shhxzq.dc.scs.frm.core.jpa.model;
 
 /**
  * @author XiaoYi Created on 2017-07-26 10:32:52
