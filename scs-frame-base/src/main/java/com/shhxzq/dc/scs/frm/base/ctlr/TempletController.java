@@ -21,7 +21,7 @@ import com.shhxzq.dc.scs.frm.base.page.templet.Json2Meta;
 @RequestMapping("/tmplet")
 public class TempletController {
     
-    @Value("${templet.folder}")
+    @Value("${adapter.data.folder}")
     private String templetFolderPath;
     
     
