@@ -1,6 +1,6 @@
 package com.shhxzq.dc.scs.frm.cdg.entity;
 
-import com.shhxzq.dc.scs.frm.base.page.model.templet.DictData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictData;
 
 /**
  * @author XiaoYi

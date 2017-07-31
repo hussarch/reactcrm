@@ -5,7 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
 
 /**
  * @author XiaoYi

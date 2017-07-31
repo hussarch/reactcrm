@@ -2,8 +2,8 @@ package com.shhxzq.dc.scs.frm.cdf;
 
 import java.io.File;
 
+import com.shhxzq.dc.scs.frm.base.common.type.ConfFileType;
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
-import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
 
 /**
  * @author XiaoYi
@@ -12,7 +12,7 @@ import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
 public class TempletGenerator {
     
     public static void writeTemplet(Class<?> clazz, String path, boolean overWrite){
-        Entity2Meta entity2Meta = new Entity2Meta(clazz);
+        MetaGenerater entity2Meta = new MetaGenerater(clazz);
         path = path + entity2Meta.getSubPath();
         File fp = new File(path);
         if (!fp.exists()) {
@@ -22,7 +22,7 @@ public class TempletGenerator {
                 throw new RuntimeException(String.format("The conf folder[%s] exist already, would not create.", path));
             }
         }
-        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfFileType.global.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfFileType.common.getFileName(), overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getTableMetaData(), path, ConfFileType.table.getFileName(), overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getAddMetaData(), path, ConfFileType.add.getFileName(), overWrite);
         CommonFileUtils.writeJson2File(entity2Meta.getUpdateMetaData(), path, ConfFileType.update.getFileName(), overWrite);

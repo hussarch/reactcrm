@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;

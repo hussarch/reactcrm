@@ -9,15 +9,15 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.shhxzq.dc.scs.frm.base.common.type.ConfFileType;
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
-import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ApiMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.BaseMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.DictMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.GlobalSettingMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
-import com.shhxzq.dc.scs.frm.base.page.model.templet.TableMetaData;
-import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
+import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.ApiMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.BaseMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
 
 /**
  * @author XiaoYi
@@ -41,7 +41,7 @@ public class LocalAdapterConfDataGetter extends AdapterConfDataGetter{
             return null;
         }
         ConfDataMetaData confData = new ConfDataMetaData();
-        confData.setGlobal(getMetaData(path, ConfFileType.global.getFileName(), GlobalSettingMetaData.class));
+        confData.setGlobal(getMetaData(path, ConfFileType.common.getFileName(), CommonSettingMetaData.class));
         confData.setTable(getMetaData(path, ConfFileType.table.getFileName(), TableMetaData.class));
         confData.setAdd(getMetaData(path, ConfFileType.add.getFileName(), ModaldialogMetaData.class));
         confData.setUpdate(getMetaData(path, ConfFileType.update.getFileName(), ModaldialogMetaData.class));
