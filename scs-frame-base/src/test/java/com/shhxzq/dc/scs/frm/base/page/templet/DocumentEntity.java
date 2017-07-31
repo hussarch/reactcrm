@@ -1,52 +1,75 @@
-package com.shhxzq.dc.scs.frm.cdg.entity;
+package com.shhxzq.dc.scs.frm.base.page.templet;
 
 import java.util.Date;
 
-import org.hibernate.annotations.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.shhxzq.dc.scs.frm.base.page.anotations.ApiDesc;
-import com.shhxzq.dc.scs.frm.base.page.anotations.DictDesc;
-import com.shhxzq.dc.scs.frm.base.page.anotations.FieldDesc;
-import com.shhxzq.dc.scs.frm.base.page.anotations.PageDesc;
-import com.shhxzq.dc.scs.frm.base.page.type.ApiType;
-import com.shhxzq.dc.scs.frm.base.page.type.PageType;
+import com.shhxzq.dc.scs.frm.base.page.anotations.Comnont;
+
 
 /**
  * @DocumentEntity.java
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-@PageDesc(
-    path = {"website", "edu", "doc"},
-    serviceId = "document", title = "文档", 
-    params = { "type" }, 
-    hbtEntityClass = "com.xx.Entity")
-@ApiDesc(serviceId = "docList", name = "文档列表", params = { "type" }, type = ApiType.list)
-@ApiDesc(serviceId = "docDetail", name = "文档详情", params = { "id" }, type = ApiType.detail)
+@Entity
+@Table(name = "document")
+@Comnont("文档")
 public class DocumentEntity {
-
-    @FieldDesc(label = "ID", hidden = true, notShowIn = {PageType.add}, apiType = {ApiType.list, ApiType.detail})
+    
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Comnont("主键")
     private Integer id;
-    @FieldDesc(label = "标题", search = true, max = 100, apiType = {ApiType.list, ApiType.detail})
+    
+    @Column(length = 200)
+    @Comnont("标题")
     private String title;
-
+    
+    @Column(length = 10)
+    @Comnont("类别")
     private String type;
 
-    @FieldDesc(label = "摘要", apiType = {ApiType.list, ApiType.detail})
+    @Column(length = 500)
+    @Comnont("摘要")
     private String summary;
     
-    @FieldDesc(label = "信息来源", apiType = {ApiType.list, ApiType.detail})
-    @DictDesc(dictEnumClass = SourceFrom.class)
-    private String sourceFrom;
+    @Enumerated(EnumType.STRING)
+    @Column(length=10, name="source_from")
+    @Comnont("消息来源")
+    private SourceFrom sourceFrom;
     
-    @FieldDesc(label = "作者", search = true, apiType = {ApiType.list, ApiType.detail})
+    @Column(length = 20)
+    @Comnont("作者")
     private String author;
-    @FieldDesc(label = "发布时间", apiType = {ApiType.list, ApiType.detail})
+    
+    @Column(name = "published_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Comnont("发布时间")
     private Date publishedAt;
-    @FieldDesc(label = "内容", notShowIn = {PageType.table}, apiType = {ApiType.detail})
+    
+    @Column(columnDefinition="text")
+    @Comnont("正文")
     private String content;
-    @FieldDesc(label = "创建时间", showIn = {}, apiType = {ApiType.list, ApiType.detail})
+    
+    @Column(name = "created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Comnont("创建时间")
     private Date createdAt;
+    
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    @Comnont("修改时间")
     private Date updatedAt;
 
     public Integer getId() {
@@ -73,11 +96,11 @@ public class DocumentEntity {
         this.summary = summary;
     }
 
-    public String getSourceFrom() {
+    public SourceFrom getSourceFrom() {
         return sourceFrom;
     }
 
-    public void setSourceFrom(String sourceFrom) {
+    public void setSourceFrom(SourceFrom sourceFrom) {
         this.sourceFrom = sourceFrom;
     }
 

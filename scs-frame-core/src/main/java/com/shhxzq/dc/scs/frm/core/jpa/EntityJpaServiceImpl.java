@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -24,9 +25,10 @@ import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
  * Created on 2017-07-26 09:43:55
  */
 @Service
+@Transactional
 public class EntityJpaServiceImpl implements EntityJpaService{
     
-    @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
     
     @Override

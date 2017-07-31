@@ -11,7 +11,6 @@ import com.shhxzq.dc.scs.frm.base.page.type.ConfFileType;
  */
 public class TempletGenerator {
     
-    
     public static void writeTemplet(Class<?> clazz, String path, boolean overWrite){
         Entity2Meta entity2Meta = new Entity2Meta(clazz);
         path = path + entity2Meta.getSubPath();
