@@ -19,10 +19,12 @@ import com.shhxzq.dc.scs.frm.base.common.type.PageType;
 public @interface PageDesc {
     
     String[] path();
-    String serviceId();
-    String title();
+    String name();
+    Class<?> entityClass();
     PageType mainPage() default PageType.table;
     String renderedJs() default "List.js";
     String category() default "";
-    String jpaEntityClass() default "";
+    String[] showFileds() default {};
+    String[] notShowFileds() default {};
+    
 }

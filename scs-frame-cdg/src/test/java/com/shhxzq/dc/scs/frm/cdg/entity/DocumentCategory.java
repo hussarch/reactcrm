@@ -10,15 +10,15 @@ public enum DocumentCategory implements CategoryData{
 
     news("资讯新闻"), edu("文档");
     
-    private String title;
+    private String name;
 
-    DocumentCategory(String title){
-        this.title = title;
+    DocumentCategory(String name){
+        this.name = name;
     }
     
     @Override
-    public String getPageTitle() {
-        return this.title;
+    public String getName() {
+        return this.name;
     }
 
     @Override

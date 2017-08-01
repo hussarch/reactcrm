@@ -2,7 +2,7 @@ package com.shhxzq.dc.scs.frm.core.domain;
 
 import org.springframework.data.domain.Page;
 
-import com.shhxzq.dc.scs.frm.base.page.model.templet.TableMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
 
 /**
  * @TablePageInfo.java

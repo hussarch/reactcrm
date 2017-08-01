@@ -7,8 +7,8 @@ package com.shhxzq.dc.scs.frm.base.rest.model.templet;
  */
 public interface CategoryData {
 
-    String getPageTitle();
-
     String getFieldValue();
+
+    String getName();
 
 }

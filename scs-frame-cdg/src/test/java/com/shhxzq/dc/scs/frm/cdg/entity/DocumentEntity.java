@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.shhxzq.dc.scs.frm.base.common.anotations.Comnont;
+import com.shhxzq.dc.scs.frm.base.common.anotations.Comment;
 
 
 /**
@@ -23,53 +23,53 @@ import com.shhxzq.dc.scs.frm.base.common.anotations.Comnont;
  */
 @Entity
 @Table(name = "document")
-@Comnont("文档")
+@Comment("文档")
 public class DocumentEntity {
     
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Comnont("主键")
+    @Comment("主键")
     private Integer id;
     
     @Column(length = 200)
-    @Comnont("标题")
+    @Comment("标题")
     private String title;
     
     @Column(length = 10)
-    @Comnont("类别")
+    @Comment("类别")
     private DocumentCategory type;
 
     @Column(length = 500)
-    @Comnont("摘要")
+    @Comment("摘要")
     private String summary;
     
     @Enumerated(EnumType.STRING)
     @Column(length=10, name="source_from")
-    @Comnont("消息来源")
+    @Comment("消息来源")
     private SourceFrom sourceFrom;
     
     @Column(length = 20)
-    @Comnont("作者")
+    @Comment("作者")
     private String author;
     
     @Column(name = "published_at")
     @Temporal(TemporalType.TIMESTAMP)
-    @Comnont("发布时间")
+    @Comment("发布时间")
     private Date publishedAt;
     
     @Column(columnDefinition="text")
-    @Comnont("正文")
+    @Comment("正文")
     private String content;
     
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
-    @Comnont("创建时间")
+    @Comment("创建时间")
     private Date createdAt;
     
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
-    @Comnont("修改时间")
+    @Comment("修改时间")
     private Date updatedAt;
 
     public Integer getId() {

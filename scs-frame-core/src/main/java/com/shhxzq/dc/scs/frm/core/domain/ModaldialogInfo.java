@@ -1,6 +1,6 @@
 package com.shhxzq.dc.scs.frm.core.domain;
 
-import com.shhxzq.dc.scs.frm.base.page.model.templet.ModaldialogMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
 
 /**
  * @author XiaoYi

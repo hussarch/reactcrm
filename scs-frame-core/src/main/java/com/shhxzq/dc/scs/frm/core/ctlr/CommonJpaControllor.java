@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shhxzq.dc.scs.frm.base.common.type.PageType;
+import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
+import com.shhxzq.dc.scs.frm.cdcache.getter.AdapterConfDataGetter;
 import com.shhxzq.dc.scs.frm.core.adapter.JpaApadterService;
 import com.shhxzq.dc.scs.frm.core.domain.CommonResponse;
 import com.shhxzq.dc.scs.frm.core.domain.ModaldialogInfo;
 import com.shhxzq.dc.scs.frm.core.domain.TablePageInfo;
-import com.shhxzq.dc.scs.frm.base.page.model.ConfDataMetaData;
-import com.shhxzq.dc.scs.frm.base.page.type.PageType;
-import com.shhxzq.dc.scs.frm.cdcache.getter.AdapterConfDataGetter;
 
 /**
  * @author XiaoYi Created on 2017-07-26 16:08:50

@@ -3,23 +3,19 @@ package com.shhxzq.dc.scs.frm.cdf.templete.anotations;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
  * @author XiaoYi
- * Created on 2017-07-17 11:18:24
+ * Created on 2017-08-01 10:20:51
  */
 @Retention(RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@Repeatable(ApiDescs.class)
-public @interface ApiDesc {
+public @interface CategoryDesc {
     
-    String serviceId();
-    String name();
-    String[] params() default {};
-    String[] showFileds() default {};
-    String[] notShowFileds() default {};
+    String fieldName();
+    
+    String[] group();
     
 }

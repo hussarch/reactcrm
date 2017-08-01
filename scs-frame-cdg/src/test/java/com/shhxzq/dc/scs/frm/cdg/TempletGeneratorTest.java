@@ -1,9 +1,12 @@
 package com.shhxzq.dc.scs.frm.cdg;
 
-import com.shhxzq.dc.scs.frm.base.common.type.ApiType;
+import com.shhxzq.dc.scs.frm.base.common.type.PageType;
 import com.shhxzq.dc.scs.frm.cdf.TempletGenerator;
+import com.shhxzq.dc.scs.frm.cdf.templete.TempletDefinition;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.ApiDesc;
+import com.shhxzq.dc.scs.frm.cdf.templete.anotations.DictDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageDesc;
+import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageFieldDesc;
 import com.shhxzq.dc.scs.frm.cdg.entity.DocumentEntity;
 
 /**
@@ -11,19 +14,29 @@ import com.shhxzq.dc.scs.frm.cdg.entity.DocumentEntity;
  */
 public class TempletGeneratorTest {
 
-    @PageDesc(path = { "website", "edu", "doc" }, 
-            serviceId = "document", 
-            title = "文档", 
-            category = "type")
-    @ApiDesc(serviceId = "list", name = "常见问答列表", params = { "type" }, type = ApiType.list)
-    @ApiDesc(serviceId = "detail", name = "常见问答详情", params = { "id" }, type = ApiType.detail)
-    public void defineDocumentEntity() {
+    public TempletGeneratorTest(String name, String[] array, Class<?> clazz) {
 
+    }
+
+    @PageDesc(path = { "website", "edu", "doc" }, name = "文档", category = "type", entityClass = DocumentEntity.class)
+    @PageFieldDesc(type = PageType.table, notShowFileds = {"content", "createdAt", "updatedAt"})
+    @PageFieldDesc(type = PageType.add, notShowFileds = {"id", "createdAt", "updatedAt"})
+    @PageFieldDesc(type = PageType.update, notShowFileds = {"createdAt", "updatedAt"}, hiddenFileds = "id")
+    @PageFieldDesc(type = PageType.view, notShowFileds = {"createdAt", "updatedAt"}, hiddenFileds = "id")
+    @ApiDesc(serviceId = "list", name = "常见问答列表", params = { "type" }, 
+        notShowFileds = { "createdAt", "updatedAt" })
+    @ApiDesc(serviceId = "detail", name = "常见问答详情", params = { "id" }, 
+        notShowFileds = { "createdAt", "updatedAt" })
+    public void defineDocumentEntity() {
     }
 
     public static void main(String[] args) {
         String path = "/Users/sailor/git/adapter-data-sys/conf-data/";
         TempletGenerator.writeTemplet(DocumentEntity.class, path, true);
+
+        String name;
+        new TempletGeneratorTest(name = "test", args, null);
+
     }
 
 }

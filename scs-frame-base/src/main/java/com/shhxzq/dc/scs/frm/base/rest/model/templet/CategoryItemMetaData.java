@@ -3,12 +3,16 @@ package com.shhxzq.dc.scs.frm.base.rest.model.templet;
 /**
  * @author XiaoYi Created on 2017-07-31 15:49:21
  */
-public class CategoryItemMetaData extends BaseMetaData implements CategoryData{
+public class CategoryItemMetaData extends BaseMetaData implements CategoryData {
 
     private String fieldValue;
-    private String pageTitle;
+    private String name;
+    
+    public CategoryItemMetaData(String fieldValue, String name){
+        this.fieldValue = fieldValue;
+        this.name = name;
+    }
 
-    @Override
     public String getFieldValue() {
         return fieldValue;
     }
@@ -17,13 +21,12 @@ public class CategoryItemMetaData extends BaseMetaData implements CategoryData{
         this.fieldValue = fieldValue;
     }
 
-    @Override
-    public String getPageTitle() {
-        return pageTitle;
+    public String getName() {
+        return name;
     }
 
-    public void setPageTitle(String pageTitle) {
-        this.pageTitle = pageTitle;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class CategoryItemMetaData extends BaseMetaData implements CategoryData{
         final int prime = 31;
         int result = 1;
         result = prime * result + ((fieldValue == null) ? 0 : fieldValue.hashCode());
-        result = prime * result + ((pageTitle == null) ? 0 : pageTitle.hashCode());
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -49,17 +52,17 @@ public class CategoryItemMetaData extends BaseMetaData implements CategoryData{
                 return false;
         } else if (!fieldValue.equals(other.fieldValue))
             return false;
-        if (pageTitle == null) {
-            if (other.pageTitle != null)
+        if (name == null) {
+            if (other.name != null)
                 return false;
-        } else if (!pageTitle.equals(other.pageTitle))
+        } else if (!name.equals(other.name))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "CategoryItemMetaData [fieldValue=" + fieldValue + ", pageTitle=" + pageTitle + "]";
+        return "CategoryItemMetaData [fieldValue=" + fieldValue + ", name=" + name + "]";
     }
 
 }

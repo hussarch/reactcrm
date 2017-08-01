@@ -9,77 +9,32 @@ import java.util.List;
  */
 public class TableMetaData extends BaseMetaData {
     
-    private String title;
     private List<FieldMetaData> searchFields;
     private List<ButtonMetaData> buttons;
     private List<FieldMetaData> columns;
-    private Integer totle;
-    private Integer totlePage;
-    private Integer pageNo;
-    private Integer pageSize;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
+    
     public List<FieldMetaData> getSearchFields() {
         return searchFields;
     }
-
+    
     public void setSearchFields(List<FieldMetaData> searchFields) {
         this.searchFields = searchFields;
     }
-
+    
     public List<ButtonMetaData> getButtons() {
         return buttons;
     }
-
+    
     public void setButtons(List<ButtonMetaData> buttons) {
         this.buttons = buttons;
     }
-
+    
     public List<FieldMetaData> getColumns() {
         return columns;
     }
-
+    
     public void setColumns(List<FieldMetaData> columns) {
         this.columns = columns;
-    }
-
-    public Integer getTotle() {
-        return totle;
-    }
-
-    public void setTotle(Integer totle) {
-        this.totle = totle;
-    }
-
-    public Integer getTotlePage() {
-        return totlePage;
-    }
-
-    public void setTotlePage(Integer totlePage) {
-        this.totlePage = totlePage;
-    }
-
-    public Integer getPageNo() {
-        return pageNo;
-    }
-
-    public void setPageNo(Integer pageNo) {
-        this.pageNo = pageNo;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
     }
 
     @Override
@@ -88,12 +43,7 @@ public class TableMetaData extends BaseMetaData {
         int result = 1;
         result = prime * result + ((buttons == null) ? 0 : buttons.hashCode());
         result = prime * result + ((columns == null) ? 0 : columns.hashCode());
-        result = prime * result + ((pageNo == null) ? 0 : pageNo.hashCode());
-        result = prime * result + ((pageSize == null) ? 0 : pageSize.hashCode());
         result = prime * result + ((searchFields == null) ? 0 : searchFields.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
-        result = prime * result + ((totle == null) ? 0 : totle.hashCode());
-        result = prime * result + ((totlePage == null) ? 0 : totlePage.hashCode());
         return result;
     }
 
@@ -116,43 +66,17 @@ public class TableMetaData extends BaseMetaData {
                 return false;
         } else if (!columns.equals(other.columns))
             return false;
-        if (pageNo == null) {
-            if (other.pageNo != null)
-                return false;
-        } else if (!pageNo.equals(other.pageNo))
-            return false;
-        if (pageSize == null) {
-            if (other.pageSize != null)
-                return false;
-        } else if (!pageSize.equals(other.pageSize))
-            return false;
         if (searchFields == null) {
             if (other.searchFields != null)
                 return false;
         } else if (!searchFields.equals(other.searchFields))
-            return false;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
-        if (totle == null) {
-            if (other.totle != null)
-                return false;
-        } else if (!totle.equals(other.totle))
-            return false;
-        if (totlePage == null) {
-            if (other.totlePage != null)
-                return false;
-        } else if (!totlePage.equals(other.totlePage))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "TableMetaData [title=" + title + ", searchFields=" + searchFields + ", buttons=" + buttons + ", columns=" + columns + ", totle="
-                + totle + ", totlePage=" + totlePage + ", pageNo=" + pageNo + ", pageSize=" + pageSize + "]";
+        return "TableMetaData [searchFields=" + searchFields + ", buttons=" + buttons + ", columns=" + columns + "]";
     }
 
 }

@@ -2,8 +2,8 @@ package com.shhxzq.dc.scs.frm.base.rest.model.templet;
 
 /**
  * @FieldMetaInfo.java
- * @author XiaoYi(hussarch@126.com)
- * Created on 2017年6月21日, ©2017 some rights reserved
+ * @author XiaoYi(hussarch@126.com) Created on 2017年6月21日, ©2017 some rights
+ *         reserved
  */
 public class FieldMetaData extends BaseMetaData {
 
@@ -11,7 +11,7 @@ public class FieldMetaData extends BaseMetaData {
     private String name;
     private Boolean hidden;
     private String type;
-    private Integer size;
+    private Integer length;
 
     public String getLabel() {
         return label;
@@ -45,12 +45,12 @@ public class FieldMetaData extends BaseMetaData {
         this.type = type;
     }
 
-    public Integer getSize() {
-        return size;
+    public Integer getLength() {
+        return length;
     }
 
-    public void setSize(Integer size) {
-        this.size = size;
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
     @Override
@@ -59,8 +59,8 @@ public class FieldMetaData extends BaseMetaData {
         int result = 1;
         result = prime * result + ((hidden == null) ? 0 : hidden.hashCode());
         result = prime * result + ((label == null) ? 0 : label.hashCode());
+        result = prime * result + ((length == null) ? 0 : length.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((size == null) ? 0 : size.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
@@ -84,15 +84,15 @@ public class FieldMetaData extends BaseMetaData {
                 return false;
         } else if (!label.equals(other.label))
             return false;
+        if (length == null) {
+            if (other.length != null)
+                return false;
+        } else if (!length.equals(other.length))
+            return false;
         if (name == null) {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
-            return false;
-        if (size == null) {
-            if (other.size != null)
-                return false;
-        } else if (!size.equals(other.size))
             return false;
         if (type == null) {
             if (other.type != null)
@@ -104,7 +104,7 @@ public class FieldMetaData extends BaseMetaData {
 
     @Override
     public String toString() {
-        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", type=" + type + ", size=" + size + "]";
+        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", type=" + type + ", length=" + length + "]";
     }
 
 }

@@ -3,7 +3,6 @@ package com.shhxzq.dc.scs.frm.cdf.templete.anotations;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -13,13 +12,8 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@Repeatable(ApiDescs.class)
-public @interface ApiDesc {
+public @interface PageFieldDescs {
     
-    String serviceId();
-    String name();
-    String[] params() default {};
-    String[] showFileds() default {};
-    String[] notShowFileds() default {};
+    PageFieldDesc[] value();
     
 }

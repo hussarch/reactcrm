@@ -10,19 +10,10 @@ import java.util.Map;
  */
 public class ApiMetaData extends BaseMetaData{
     
-    private String serviceId;
     private String title;
     private Map<String, String> params;
     private List<FieldMetaData> fields;
     
-    public String getServiceId() {
-        return serviceId;
-    }
-    
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -60,7 +51,6 @@ public class ApiMetaData extends BaseMetaData{
         int result = 1;
         result = prime * result + ((fields == null) ? 0 : fields.hashCode());
         result = prime * result + ((params == null) ? 0 : params.hashCode());
-        result = prime * result + ((serviceId == null) ? 0 : serviceId.hashCode());
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
     }
@@ -84,11 +74,6 @@ public class ApiMetaData extends BaseMetaData{
                 return false;
         } else if (!params.equals(other.params))
             return false;
-        if (serviceId == null) {
-            if (other.serviceId != null)
-                return false;
-        } else if (!serviceId.equals(other.serviceId))
-            return false;
         if (title == null) {
             if (other.title != null)
                 return false;
@@ -99,8 +84,7 @@ public class ApiMetaData extends BaseMetaData{
 
     @Override
     public String toString() {
-        return "ApiMetaData [serviceId=" + serviceId + ", title=" + title + ", params=" + params + ", fields=" + fields + "]";
+        return "ApiMetaData [title=" + title + ", params=" + params + ", fields=" + fields + "]";
     }
 
-    
 }

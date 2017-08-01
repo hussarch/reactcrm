@@ -13,9 +13,9 @@ import com.shhxzq.dc.scs.frm.base.common.type.PageType;
  * @author XiaoYi(hussarch@126.com)
  * Created on 2017年7月9日, ©2017 some rights reserved
  */
-@Target(ElementType.FIELD)
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME) 
-public @interface FieldDesc {
+public @interface FieldsDesc {
     
     String label();
     String fieldAlias() default "";

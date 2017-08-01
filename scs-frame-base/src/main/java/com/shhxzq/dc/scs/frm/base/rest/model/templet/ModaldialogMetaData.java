@@ -6,22 +6,12 @@ package com.shhxzq.dc.scs.frm.base.rest.model.templet;
 import java.util.List;
 
 /**
- * @author XiaoYi
- * Created on 2017-06-22 17:55:06
+ * @author XiaoYi Created on 2017-06-22 17:55:06
  */
-public class ModaldialogMetaData extends BaseMetaData{
+public class ModaldialogMetaData extends BaseMetaData {
 
-    private String title;
     private List<FieldMetaData> fields;
     private List<ButtonMetaData> buttons;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public List<FieldMetaData> getFields() {
         return fields;
@@ -45,7 +35,6 @@ public class ModaldialogMetaData extends BaseMetaData{
         int result = 1;
         result = prime * result + ((buttons == null) ? 0 : buttons.hashCode());
         result = prime * result + ((fields == null) ? 0 : fields.hashCode());
-        result = prime * result + ((title == null) ? 0 : title.hashCode());
         return result;
     }
 
@@ -68,17 +57,12 @@ public class ModaldialogMetaData extends BaseMetaData{
                 return false;
         } else if (!fields.equals(other.fields))
             return false;
-        if (title == null) {
-            if (other.title != null)
-                return false;
-        } else if (!title.equals(other.title))
-            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "ModaldialogMetaData [title=" + title + ", fields=" + fields + ", buttons=" + buttons + "]";
+        return "ModaldialogMetaData [fields=" + fields + ", buttons=" + buttons + "]";
     }
 
 }

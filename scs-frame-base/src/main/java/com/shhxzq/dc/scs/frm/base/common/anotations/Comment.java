@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface Comnont {
+public @interface Comment {
     
     String value();
     

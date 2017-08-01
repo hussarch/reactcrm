@@ -7,19 +7,20 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import com.shhxzq.dc.scs.frm.base.common.type.PageType;
+
 /**
  * @author XiaoYi
- * Created on 2017-07-17 11:18:24
+ * Created on 2017-08-01 14:08:52
  */
 @Retention(RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-@Repeatable(ApiDescs.class)
-public @interface ApiDesc {
-    
-    String serviceId();
-    String name();
-    String[] params() default {};
+@Repeatable(PageFieldDescs.class)
+public @interface PageFieldDesc {
+
+    PageType type();
     String[] showFileds() default {};
     String[] notShowFileds() default {};
-    
+    String[] hiddenFileds() default {};
+        
 }
