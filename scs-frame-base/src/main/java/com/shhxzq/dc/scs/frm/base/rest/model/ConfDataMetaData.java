@@ -11,16 +11,16 @@ import com.shhxzq.dc.scs.frm.base.rest.model.templet.CrudMetaData;
  */
 public class ConfDataMetaData {
 
-    private CommonSettingMetaData global;
+    private CommonSettingMetaData common;
     private CrudMetaData crud;
     private Map<String, ApiMetaData> apis;
 
-    public CommonSettingMetaData getGlobal() {
-        return global;
+    public CommonSettingMetaData getCommon() {
+        return common;
     }
 
-    public void setGlobal(CommonSettingMetaData global) {
-        this.global = global;
+    public void setCommon(CommonSettingMetaData common) {
+        this.common = common;
     }
 
     public CrudMetaData getCrud() {
@@ -44,8 +44,8 @@ public class ConfDataMetaData {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((apis == null) ? 0 : apis.hashCode());
+        result = prime * result + ((common == null) ? 0 : common.hashCode());
         result = prime * result + ((crud == null) ? 0 : crud.hashCode());
-        result = prime * result + ((global == null) ? 0 : global.hashCode());
         return result;
     }
 
@@ -63,22 +63,22 @@ public class ConfDataMetaData {
                 return false;
         } else if (!apis.equals(other.apis))
             return false;
+        if (common == null) {
+            if (other.common != null)
+                return false;
+        } else if (!common.equals(other.common))
+            return false;
         if (crud == null) {
             if (other.crud != null)
                 return false;
         } else if (!crud.equals(other.crud))
-            return false;
-        if (global == null) {
-            if (other.global != null)
-                return false;
-        } else if (!global.equals(other.global))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "ConfDataMetaData [global=" + global + ", crud=" + crud + ", apis=" + apis + "]";
+        return "ConfDataMetaData [common=" + common + ", crud=" + crud + ", apis=" + apis + "]";
     }
 
 }

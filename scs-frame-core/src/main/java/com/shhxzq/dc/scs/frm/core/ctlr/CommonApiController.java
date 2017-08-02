@@ -51,7 +51,7 @@ public class CommonApiController {
         if (apis == null || !apis.containsKey(name)) {
             return new CommonResponse<Void>(false, "The api have not been defined");
         }
-        Object value = jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), id);
+        Object value = jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), id);
         if (value == null) {
             return new CommonResponse<Void>(false, "The id does not exist");
         }
@@ -94,7 +94,7 @@ public class CommonApiController {
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
         }
         Pageable pageable = new PageRequest(pageNo - 1, size);
-        Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), pageable, params);
+        Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params);
         List<?> content = page.getContent();
         if (content == null || content.isEmpty()) {
             return new CommonResponse<>(true, "no result");

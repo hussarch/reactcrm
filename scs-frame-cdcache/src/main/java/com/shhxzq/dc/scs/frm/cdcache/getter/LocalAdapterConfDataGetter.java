@@ -42,7 +42,7 @@ public class LocalAdapterConfDataGetter extends AdapterConfDataGetter{
             return null;
         }
         ConfDataMetaData confData = new ConfDataMetaData();
-        confData.setGlobal(getMetaData(path, ConfFileType.common.getFileName(), CommonSettingMetaData.class));
+        confData.setCommon(getMetaData(path, ConfFileType.common.getFileName(), CommonSettingMetaData.class));
         confData.setCrud(getMetaData(path, ConfFileType.crud.getFileName(), CrudMetaData.class));
         confData.setApis(getApiMetaData(path, ConfFileType.api.getFileName(), new TypeToken<Map<String, ApiMetaData>>() {}.getType()));
         return confData;

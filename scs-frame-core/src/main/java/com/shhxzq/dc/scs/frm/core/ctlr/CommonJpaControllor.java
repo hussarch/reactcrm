@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shhxzq.dc.scs.frm.base.common.type.PageType;
 import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
 import com.shhxzq.dc.scs.frm.cdcache.getter.AdapterConfDataGetter;
 import com.shhxzq.dc.scs.frm.core.adapter.JpaApadterService;
+import com.shhxzq.dc.scs.frm.core.domain.CommonPageDefineInfo;
 import com.shhxzq.dc.scs.frm.core.domain.CommonResponse;
 import com.shhxzq.dc.scs.frm.core.domain.ModaldialogInfo;
 import com.shhxzq.dc.scs.frm.core.domain.TablePageInfo;
@@ -62,6 +65,13 @@ public class CommonJpaControllor {
         return new CommonResponse<>(true, content);
     }
     
+    private CommonPageDefineInfo getCommonPageDefineInfo(CommonSettingMetaData common, ModaldialogMetaData data){
+        CommonPageDefineInfo define = new CommonPageDefineInfo();
+        
+        
+        return define;
+    }
+    
     @RequestMapping(value = "/dialog/post", method = RequestMethod.POST)
     @ResponseBody
     public CommonResponse<Void> postFieldData(@RequestParam String serviceId, @RequestParam String page, @RequestParam String data){
@@ -69,11 +79,11 @@ public class CommonJpaControllor {
         if(confData == null){
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
         }else if(PageType.add.name().equals(page)){
-            jpaApadterService.add(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), data); 
+            jpaApadterService.add(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), data); 
         }else if(PageType.update.name().equals(page)){
-            jpaApadterService.update(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), data); 
+            jpaApadterService.update(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), data); 
         }else if(PageType.delete.name().equals(page)){
-            jpaApadterService.delete(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), Integer.valueOf(data));
+            jpaApadterService.delete(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), Integer.valueOf(data));
         }else{
             return new CommonResponse<Void>(false, "Wrong type: " + page);
         }
