@@ -2,24 +2,22 @@ package com.shhxzq.dc.scs.frm.core.domain;
 
 import org.springframework.data.domain.Page;
 
-import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
-
 /**
  * @TablePageInfo.java
- * @author XiaoYi(hussarch@126.com)
- * Created on 2017年7月27日, ©2017 some rights reserved
+ * @author XiaoYi(hussarch@126.com) Created on 2017年7月27日, ©2017 some rights
+ *         reserved
  */
 public class TablePageInfo {
-    
-    private TableMetaData define;
-    
+
+    private TablePageDefineInfo define;
+
     private Page<?> page;
 
-    public TableMetaData getDefine() {
+    public TablePageDefineInfo getDefine() {
         return define;
     }
 
-    public void setDefine(TableMetaData define) {
+    public void setDefine(TablePageDefineInfo define) {
         this.define = define;
     }
 
@@ -35,5 +33,5 @@ public class TablePageInfo {
     public String toString() {
         return "TablePageInfo [define=" + define + ", page=" + page + "]";
     }
-    
+
 }

@@ -12,6 +12,7 @@ public class FieldMetaData extends BaseMetaData {
     private Boolean hidden;
     private String type;
     private Integer length;
+    private Boolean required;
 
     public String getLabel() {
         return label;
@@ -53,6 +54,14 @@ public class FieldMetaData extends BaseMetaData {
         this.length = length;
     }
 
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public void setRequired(Boolean required) {
+        this.required = required;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -61,6 +70,7 @@ public class FieldMetaData extends BaseMetaData {
         result = prime * result + ((label == null) ? 0 : label.hashCode());
         result = prime * result + ((length == null) ? 0 : length.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((required == null) ? 0 : required.hashCode());
         result = prime * result + ((type == null) ? 0 : type.hashCode());
         return result;
     }
@@ -94,6 +104,11 @@ public class FieldMetaData extends BaseMetaData {
                 return false;
         } else if (!name.equals(other.name))
             return false;
+        if (required == null) {
+            if (other.required != null)
+                return false;
+        } else if (!required.equals(other.required))
+            return false;
         if (type == null) {
             if (other.type != null)
                 return false;
@@ -104,7 +119,8 @@ public class FieldMetaData extends BaseMetaData {
 
     @Override
     public String toString() {
-        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", type=" + type + ", length=" + length + "]";
+        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", type=" + type + ", length=" + length + ", required="
+                + required + "]";
     }
 
 }

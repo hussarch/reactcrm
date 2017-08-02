@@ -1,6 +1,7 @@
 package com.shhxzq.dc.scs.frm.cdg.entity;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,13 +48,13 @@ public class DocumentEntity {
     private String summary;
     
     @Enumerated(EnumType.STRING)
-    @Column(length=10, name="source_from")
+    @Column(length=10, name="source_from", nullable = false)
     @Comment("消息来源")
     private SourceFrom sourceFrom;
     
-    @Column(length = 20)
     @Comment("作者")
-    private String author;
+    @ManyToOne
+    private AuthorEntity author;
     
     @Column(name = "published_at")
     @Temporal(TemporalType.TIMESTAMP)
@@ -62,6 +65,10 @@ public class DocumentEntity {
     @Comment("正文")
     private String content;
     
+    @Comment("评论")
+    @OneToMany
+    private Set<CommentEntity> comments;
+
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     @Comment("创建时间")
@@ -104,11 +111,11 @@ public class DocumentEntity {
         this.sourceFrom = sourceFrom;
     }
 
-    public String getAuthor() {
+    public AuthorEntity getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(AuthorEntity author) {
         this.author = author;
     }
 
@@ -150,5 +157,15 @@ public class DocumentEntity {
 
     public void setType(DocumentCategory type) {
         this.type = type;
+    }
+
+    
+    public Set<CommentEntity> getComments() {
+        return comments;
+    }
+
+    
+    public void setComments(Set<CommentEntity> comments) {
+        this.comments = comments;
     }
 }

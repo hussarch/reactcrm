@@ -3,9 +3,8 @@ package com.shhxzq.dc.scs.frm.cdf;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.shhxzq.dc.scs.frm.base.common.anotations.Comment;
-import com.shhxzq.dc.scs.frm.base.common.type.ApiType;
 import com.shhxzq.dc.scs.frm.base.common.type.MethodType;
 import com.shhxzq.dc.scs.frm.base.common.type.PageType;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.ApiMetaData;
@@ -27,15 +25,15 @@ import com.shhxzq.dc.scs.frm.base.rest.model.templet.CategoryData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CategoryItemMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CategoryMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CrudMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.EnumDictMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.FieldMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.ApiDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.CategoryDesc;
-import com.shhxzq.dc.scs.frm.cdf.templete.anotations.DictDesc;
-import com.shhxzq.dc.scs.frm.cdf.templete.anotations.FieldsDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageFieldDesc;
 
@@ -53,7 +51,7 @@ public class MetaGenerater {
     private ApiDesc[] apiDescs;
     private CategoryDesc categoryDesc;
 
-    private Map<MethodType, ButtonMetaData> buttonMap = new HashMap<>();
+    private Map<MethodType, ButtonMetaData> buttonMap = new LinkedHashMap<>();
     private List<FieldMetaData> entityClassFields;
     private CategoryMetaData categoryMetaData;
     
@@ -78,7 +76,6 @@ public class MetaGenerater {
         }
         this.name = this.pageDesc.name();
         this.entityClass = pageDesc.entityClass();
-        this.entityClassFields = getAllFields();
         this.pageFieldDescs = mothod.getAnnotationsByType(PageFieldDesc.class);
         if (this.pageFieldDescs == null) {
             System.out.println("Warning: the annotation PageFieldDesc have not been set");
@@ -88,6 +85,8 @@ public class MetaGenerater {
             System.out.println("Info: the annotation ApiDesc have not been set, there is not api defination");
         }
         this.categoryDesc = mothod.getAnnotation(CategoryDesc.class);
+        this.categoryMetaData = getCategoryMetaData();
+        this.entityClassFields = getAllFields();
     }
 
     private Method getMethod(Class<?> clazz, String metodName) {
@@ -110,15 +109,17 @@ public class MetaGenerater {
         data.setClazz(this.entityClass.getName());
         data.setMainPage(pageDesc.mainPage().toString());
         data.setRenderedJs(pageDesc.renderedJs());
-        data.setCategory(getCategoryMetaData());
+        data.setCategory(categoryMetaData);
         data.setFields(entityClassFields);
+        data.setButtons(this.buttonMap);
+        data.setDicts(getDicts());
         return data;
     }
 
     private CategoryMetaData getCategoryMetaData() {
-        this.categoryMetaData = getPageDescCategory();
-        if(this.categoryMetaData == null){
-            this.categoryMetaData = getCategoryDescCategory();
+        CategoryMetaData categoryMetaData = getPageDescCategory();
+        if(categoryMetaData == null){
+            categoryMetaData = getCategoryDescCategory();
         }
         return categoryMetaData;
     }
@@ -187,7 +188,7 @@ public class MetaGenerater {
 
     private Field getField(String fn){
         try {
-            return this.entityClass.getField(fn);
+            return this.entityClass.getDeclaredField(fn);
         } catch (NoSuchFieldException | SecurityException e) {
             e.printStackTrace();
         }
@@ -214,6 +215,9 @@ public class MetaGenerater {
      * "type": "string"
      */
     private FieldMetaData getFieldMetaData(Field field) {
+        if(this.categoryMetaData != null && this.categoryMetaData.getFieldName().equals(field.getName())){
+            return null;
+        }
         FieldMetaData data = new FieldMetaData();
         Comment comment = field.getAnnotation(Comment.class);
         if (comment != null) {
@@ -223,39 +227,46 @@ public class MetaGenerater {
         data.setType(getFieldType(field));
         Column column = field.getAnnotation(Column.class);
         if (column != null && data.getType().equals("string")) {
-            data.setLength(column.length());
+            if(StringUtils.endsWith(column.columnDefinition(), "text")){
+                data.setLength(20000);
+            }else{
+                data.setLength(column.length());
+            }
+            if(!column.nullable()){
+                data.setRequired(false);
+            }
         }
         return data;
     }
 
     private String getFieldType(Field field) {
-        if (field.getClass().isPrimitive()) {
-            return field.getClass().getName();
-        } else if (Date.class.equals(field.getClass())) {
+        Class<?> type = field.getType();
+        if (Date.class.equals(type)) {
             return "datetime";
-        } else if (String.class.equals(field.getClass())) {
+        } else if (String.class.equals(type)) {
             return "string";
-        } else if (Integer.class.equals(field.getClass())) {
+        } else if (Integer.class.equals(type)) {
             return "int";
-        } else if (Long.class.equals(field.getClass())) {
+        } else if (Long.class.equals(type)) {
             return "long";
-        } else if (Double.class.equals(field.getClass())) {
+        } else if (Double.class.equals(type)) {
             return "double";
-        } else if (Float.class.equals(field.getClass())) {
+        } else if (Float.class.equals(type)) {
             return "float";
-        }else if(DictData.class.isAssignableFrom(field.getType())){
+        }else if(DictData.class.isAssignableFrom(type)){
             return "select";
-        }else if (List.class.isAssignableFrom(field.getType()) || Set.class.isAssignableFrom(field.getType())) {
-            ParameterizedType pt = (ParameterizedType) field.getGenericType() ; 
+        }else if (List.class.isAssignableFrom(type) || Set.class.isAssignableFrom(type)) {
+            ParameterizedType pt = (ParameterizedType) field.getGenericType(); 
             Class<?> clazz = (Class<?>) pt.getActualTypeArguments()[0]; 
             if(DictData.class.isAssignableFrom(clazz)){
                 return "multi_select";
-            }
-            if(clazz.getAnnotation(Table.class) != null){
+            }else if(clazz.getAnnotation(Table.class) != null){
                 return "multi_select";
             }
+        }else if(type.getAnnotation(Table.class) != null){
+            return "select";
         }
-        return field.getType().getName();
+        return type.getName();
     }
 
     public String getSubPath() {
@@ -269,30 +280,40 @@ public class MetaGenerater {
         }
         return builder.toString();
     }
+    
+    public CrudMetaData getCrudMetaData(){
+        CrudMetaData crudMetaData = new CrudMetaData();
+        crudMetaData.setTable(getTableMetaData());
+        crudMetaData.setAdd(getModaldialogMetaData(PageType.add, MethodType.add, MethodType.close));
+        crudMetaData.setUpdate(getModaldialogMetaData(PageType.update, MethodType.update, MethodType.close));
+        crudMetaData.setView(getModaldialogMetaData(PageType.view, MethodType.close));
+        return crudMetaData;
+    }
+    
 
-    public TableMetaData getTableMetaData() {
+    private TableMetaData getTableMetaData() {
         TableMetaData data = new TableMetaData();
         data.setSearchFields(getPageFeildMetaDatas(PageType.search));
         data.setButtons(getButtons(MethodType.add, MethodType.update, MethodType.delete, MethodType.search));
-        data.setColumns(getPageFeildMetaDatas(PageType.table));
+        data.setFields(getPageFeildMetaDatas(PageType.table));
         return data;
     }
 
-    private List<ButtonMetaData> getButtons(MethodType... types) {
-        List<ButtonMetaData> list = new ArrayList<>();
+    private List<String> getButtons(MethodType... types) {
+        List<String> list = new ArrayList<>();
         for (MethodType type : types) {
-            list.add(buttonMap.get(type));
+            list.add(type.name());
         }
         return list;
     }
 
-    private List<FieldMetaData> getFeildMetaDatas(FeildMetaFilter filter) {
-        List<FieldMetaData> list = new ArrayList<>();
-        FieldMetaData filteredFieldMetaData;
+    private List<String> getFeildMetaDatas(FeildMetaFilter filter) {
+        List<String> list = new ArrayList<>();
+        String name;
         for (FieldMetaData fieldMetaData : this.entityClassFields) {
-            filteredFieldMetaData = filter.getFieldMetaData(fieldMetaData);
-            if (filteredFieldMetaData != null) {
-                list.add(filteredFieldMetaData);
+            name = filter.getFieldMetaData(fieldMetaData);
+            if (name != null) {
+                list.add(name);
             }
         }
         if(list.size() == 0){
@@ -301,36 +322,36 @@ public class MetaGenerater {
         return list;
     }
 
-    private List<FieldMetaData> getPageFeildMetaDatas(PageType type) {
+    private List<String> getPageFeildMetaDatas(PageType type) {
         PageFieldDesc pageFieldDesc = getPageFieldDesc(type);
         return getFeildMetaDatas(new FeildMetaFilter() {
 
             @Override
-            public FieldMetaData getFieldMetaData(FieldMetaData fieldMetaData) {
+            public String getFieldMetaData(FieldMetaData fieldMetaData) {
                 return MetaGenerater.this.getFieldMetaData(fieldMetaData, pageFieldDesc);
             }
 
         });
     }
 
-    private FieldMetaData getFieldMetaData(FieldMetaData fieldMetaData, PageFieldDesc pageFieldDesc) {
+    private String getFieldMetaData(FieldMetaData fieldMetaData, PageFieldDesc pageFieldDesc) {
         if(this.categoryMetaData != null && this.categoryMetaData.getFieldName().equals(fieldMetaData.getName())){
             return null;
         }
         FieldMetaData fd = new FieldMetaData();
         fd.setName(fieldMetaData.getName());
         if(pageFieldDesc == null){
-            return fd;
+            return fd.getName();
         }
         if(ArrayUtils.contains(pageFieldDesc.notShowFileds(), fieldMetaData.getName())){
             return null;
         }else if(ArrayUtils.contains(pageFieldDesc.hiddenFileds(), fieldMetaData.getName())){
-            fd.setHidden(true);
+            return null;
         }
         if(pageFieldDesc.showFileds() == null || pageFieldDesc.showFileds().length == 0){
-            return fd;
+            return fd.getName();
         }else if(ArrayUtils.contains(pageFieldDesc.showFileds(), fieldMetaData.getName())){
-            return fd;
+            return fd.getName();
         }else{
             return null;
         }
@@ -348,34 +369,31 @@ public class MetaGenerater {
     }
 
 
-    public ModaldialogMetaData getAddMetaData() {
+    private ModaldialogMetaData getModaldialogMetaData(PageType type, MethodType... types) {
         ModaldialogMetaData data = new ModaldialogMetaData();
-        data.setFields(getPageFeildMetaDatas(PageType.add));
+        data.setFields(getPageFeildMetaDatas(type));
         if(data.getFields() == null){
             return null;
         }
-        data.setButtons(getButtons(MethodType.add, MethodType.close));
+        data.setHiddenfields(getHiddenfields(type));
+        data.setButtons(getButtons(types));
         return data;
     }
 
-    public ModaldialogMetaData getUpdateMetaData() {
-        ModaldialogMetaData data = new ModaldialogMetaData();
-        data.setFields(getPageFeildMetaDatas(PageType.update));
-        if(data.getFields() == null){
-            return null;
-        }
-        data.setButtons(getButtons(MethodType.update, MethodType.close));
-        return data;
-    }
+    private List<String> getHiddenfields(PageType type) {
+        PageFieldDesc pageFieldDesc = getPageFieldDesc(type);
+        return getFeildMetaDatas(new FeildMetaFilter() {
 
-    public ModaldialogMetaData getViewMetaData() {
-        ModaldialogMetaData data = new ModaldialogMetaData();
-        data.setFields(getPageFeildMetaDatas(PageType.view));
-        if(data.getFields() == null){
-            return null;
-        }
-        data.setButtons(getButtons(MethodType.close));
-        return data;
+            @Override
+            public String getFieldMetaData(FieldMetaData fieldMetaData) {
+                if(ArrayUtils.contains(pageFieldDesc.hiddenFileds(), fieldMetaData.getName())){
+                    return fieldMetaData.getName();
+                }else{
+                    return null;
+                }
+            }
+
+        });
     }
 
     public Map<String, ApiMetaData> getApiMetaData() {
@@ -398,21 +416,18 @@ public class MetaGenerater {
         return map;
     }
 
-    private List<FieldMetaData> getApiFields(ApiDesc desc) {
+    private List<String> getApiFields(ApiDesc desc) {
         return getFeildMetaDatas(new FeildMetaFilter() {
 
             @Override
-            public FieldMetaData getFieldMetaData(FieldMetaData fieldMetaData) {
+            public String getFieldMetaData(FieldMetaData fieldMetaData) {
                 if(ArrayUtils.contains(desc.notShowFileds(), fieldMetaData.getName())){
                     return null;
                 }
-                FieldMetaData fd = new FieldMetaData();
-                fd.setLabel(fieldMetaData.getLabel());
-                fd.setName(fieldMetaData.getName());
                 if(desc.showFileds() == null || desc.showFileds().length == 0){
-                    return fd;
+                    return fieldMetaData.getName();
                 }else if(ArrayUtils.contains(desc.showFileds(), fieldMetaData.getName())){
-                    return fd;
+                    return fieldMetaData.getName();
                 }else{
                     return null;
                 }
@@ -423,23 +438,27 @@ public class MetaGenerater {
 
     private interface FeildMetaFilter {
 
-        FieldMetaData getFieldMetaData(FieldMetaData fieldMetaData);
+        String getFieldMetaData(FieldMetaData fieldMetaData);
 
     }
 
-    // Fixed it 
-    public Map<String, Object> getDicts() {
-        Map<String, Object> dicts = new LinkedHashMap<>();
+    private Map<String, DictMetaData> getDicts() {
+        Map<String, DictMetaData> dicts = new LinkedHashMap<>();
         Field[] fields = this.entityClass.getDeclaredFields();
-        DictDesc dictDesc = null;
+        DictMetaData dictMetaData;
+        Class<?> dictType;
         for (Field field : fields) {
-            dictDesc = field.getAnnotation(DictDesc.class);
-            if (dictDesc != null) {
-                if (!dictDesc.dictEnumClass().equals(Object.class)) {
-                    dicts.put(field.getName(), getDictDataList(dictDesc.dictEnumClass()));
-                } else if (StringUtils.isNoneBlank(dictDesc.dictSql())) {
-                    dicts.put(field.getName(), dictDesc.dictSql());
-                }
+            Class<?> type = field.getType();
+            if (List.class.isAssignableFrom(field.getType()) || Set.class.isAssignableFrom(field.getType())) {
+                ParameterizedType pt = (ParameterizedType) field.getGenericType() ; 
+                Class<?> clazz = (Class<?>) pt.getActualTypeArguments()[0]; 
+                dictType = clazz;
+            }else{
+                dictType = type;
+            }
+            dictMetaData = getDictMetaData(dictType);
+            if(dictMetaData != null){
+                dicts.put(field.getName(), dictMetaData);
             }
         }
         if (dicts.isEmpty()) {
@@ -448,13 +467,26 @@ public class MetaGenerater {
             return dicts;
         }
     }
+    
+    private DictMetaData getDictMetaData(Class<?> clazz){
+        DictMetaData dictMetaData = null;
+        if(DictData.class.isAssignableFrom(clazz)){
+            dictMetaData = new DictMetaData();
+            dictMetaData.setEnumDict(getDictDataList(clazz));
+        }
+        if(clazz.getAnnotation(Table.class) != null){
+            dictMetaData = new DictMetaData();
+            dictMetaData.setEntityDictHql("select id as key, name as value from " + clazz.getName() + " where  1=1");
+        }
+        return dictMetaData;
+    }
 
-    private <T> List<DictMetaData> getDictDataList(Class<T> clazz) {
+    private <T> List<EnumDictMetaData> getDictDataList(Class<T> clazz) {
         if (DictData.class.isAssignableFrom(clazz)) {
-            List<DictMetaData> list = new ArrayList<>();
+            List<EnumDictMetaData> list = new ArrayList<>();
             Enum<?>[] enums = (Enum[]) clazz.getEnumConstants();
             for (Enum<?> item : enums) {
-                list.add(new DictMetaData((DictData) item));
+                list.add(new EnumDictMetaData((DictData) item));
             }
             return list;
         } else {

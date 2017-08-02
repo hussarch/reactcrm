@@ -1,6 +1,9 @@
 package com.shhxzq.dc.scs.frm.base.rest.model.templet;
 
 import java.util.List;
+import java.util.Map;
+
+import com.shhxzq.dc.scs.frm.base.common.type.MethodType;
 
 /**
  * @ConfMetaData.java
@@ -15,6 +18,8 @@ public class CommonSettingMetaData extends BaseMetaData {
     private CategoryMetaData category;
     private String clazz;
     private List<FieldMetaData> fields;
+    private Map<MethodType, ButtonMetaData> buttons;
+    private Map<String, DictMetaData> dicts;
 
     public String getName() {
         return name;
@@ -64,12 +69,30 @@ public class CommonSettingMetaData extends BaseMetaData {
         this.fields = fields;
     }
 
+    public Map<MethodType, ButtonMetaData> getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(Map<MethodType, ButtonMetaData> buttons) {
+        this.buttons = buttons;
+    }
+
+    public Map<String, DictMetaData> getDicts() {
+        return dicts;
+    }
+
+    public void setDicts(Map<String, DictMetaData> dicts) {
+        this.dicts = dicts;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((buttons == null) ? 0 : buttons.hashCode());
         result = prime * result + ((category == null) ? 0 : category.hashCode());
         result = prime * result + ((clazz == null) ? 0 : clazz.hashCode());
+        result = prime * result + ((dicts == null) ? 0 : dicts.hashCode());
         result = prime * result + ((fields == null) ? 0 : fields.hashCode());
         result = prime * result + ((mainPage == null) ? 0 : mainPage.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -86,6 +109,11 @@ public class CommonSettingMetaData extends BaseMetaData {
         if (getClass() != obj.getClass())
             return false;
         CommonSettingMetaData other = (CommonSettingMetaData) obj;
+        if (buttons == null) {
+            if (other.buttons != null)
+                return false;
+        } else if (!buttons.equals(other.buttons))
+            return false;
         if (category == null) {
             if (other.category != null)
                 return false;
@@ -95,6 +123,11 @@ public class CommonSettingMetaData extends BaseMetaData {
             if (other.clazz != null)
                 return false;
         } else if (!clazz.equals(other.clazz))
+            return false;
+        if (dicts == null) {
+            if (other.dicts != null)
+                return false;
+        } else if (!dicts.equals(other.dicts))
             return false;
         if (fields == null) {
             if (other.fields != null)
@@ -122,7 +155,7 @@ public class CommonSettingMetaData extends BaseMetaData {
     @Override
     public String toString() {
         return "CommonSettingMetaData [name=" + name + ", mainPage=" + mainPage + ", renderedJs=" + renderedJs + ", category=" + category + ", clazz="
-                + clazz + ", fields=" + fields + "]";
+                + clazz + ", fields=" + fields + ", buttons=" + buttons + ", dicts=" + dicts + "]";
     }
 
 }

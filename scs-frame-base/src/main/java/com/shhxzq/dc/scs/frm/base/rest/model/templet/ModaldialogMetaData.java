@@ -10,22 +10,31 @@ import java.util.List;
  */
 public class ModaldialogMetaData extends BaseMetaData {
 
-    private List<FieldMetaData> fields;
-    private List<ButtonMetaData> buttons;
-
-    public List<FieldMetaData> getFields() {
+    private List<String> fields;
+    private List<String> hiddenfields;
+    private List<String> buttons;
+    
+    public List<String> getFields() {
         return fields;
     }
-
-    public void setFields(List<FieldMetaData> fields) {
+    
+    public void setFields(List<String> fields) {
         this.fields = fields;
     }
-
-    public List<ButtonMetaData> getButtons() {
+    
+    public List<String> getHiddenfields() {
+        return hiddenfields;
+    }
+    
+    public void setHiddenfields(List<String> hiddenfields) {
+        this.hiddenfields = hiddenfields;
+    }
+    
+    public List<String> getButtons() {
         return buttons;
     }
-
-    public void setButtons(List<ButtonMetaData> buttons) {
+    
+    public void setButtons(List<String> buttons) {
         this.buttons = buttons;
     }
 
@@ -35,6 +44,7 @@ public class ModaldialogMetaData extends BaseMetaData {
         int result = 1;
         result = prime * result + ((buttons == null) ? 0 : buttons.hashCode());
         result = prime * result + ((fields == null) ? 0 : fields.hashCode());
+        result = prime * result + ((hiddenfields == null) ? 0 : hiddenfields.hashCode());
         return result;
     }
 
@@ -57,12 +67,18 @@ public class ModaldialogMetaData extends BaseMetaData {
                 return false;
         } else if (!fields.equals(other.fields))
             return false;
+        if (hiddenfields == null) {
+            if (other.hiddenfields != null)
+                return false;
+        } else if (!hiddenfields.equals(other.hiddenfields))
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "ModaldialogMetaData [fields=" + fields + ", buttons=" + buttons + "]";
+        return "ModaldialogMetaData [fields=" + fields + ", hiddenfields=" + hiddenfields + ", buttons=" + buttons + "]";
     }
 
+    
 }

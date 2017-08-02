@@ -15,6 +15,7 @@ import com.shhxzq.dc.scs.frm.base.rest.model.ConfDataMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.ApiMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.BaseMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CrudMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
@@ -42,15 +43,11 @@ public class LocalAdapterConfDataGetter extends AdapterConfDataGetter{
         }
         ConfDataMetaData confData = new ConfDataMetaData();
         confData.setGlobal(getMetaData(path, ConfFileType.common.getFileName(), CommonSettingMetaData.class));
-        confData.setTable(getMetaData(path, ConfFileType.table.getFileName(), TableMetaData.class));
-        confData.setAdd(getMetaData(path, ConfFileType.add.getFileName(), ModaldialogMetaData.class));
-        confData.setUpdate(getMetaData(path, ConfFileType.update.getFileName(), ModaldialogMetaData.class));
-        confData.setView(getMetaData(path, ConfFileType.view.getFileName(), ModaldialogMetaData.class));
+        confData.setCrud(getMetaData(path, ConfFileType.crud.getFileName(), CrudMetaData.class));
         confData.setApis(getApiMetaData(path, ConfFileType.api.getFileName(), new TypeToken<Map<String, ApiMetaData>>() {}.getType()));
-        confData.setDicts(getDictsMetaData(path, ConfFileType.dict.getFileName(), new TypeToken<Map<String, DictMetaData[]>>() {}.getType()));
         return confData;
     }
-    
+
     private String getPath(String[] pathNames){
         String path = "/";
         for(String item : pathNames){
@@ -77,7 +74,7 @@ public class LocalAdapterConfDataGetter extends AdapterConfDataGetter{
         return gson.fromJson(json, type);
     }
     
-    private Map<String, DictMetaData[]> getDictsMetaData(String path, String fn, Type type){
+    private Map<String, DictMetaData> getDictsMetaData(String path, String fn, Type type){
         String json = CommonFileUtils.readFileContent(path + "/" + fn);
         if(json == null){
             return null;

@@ -46,13 +46,15 @@ public class CommonJpaControllor {
         ModaldialogInfo content = null;
         if(confData == null){
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
+        }else if(confData.getCrud() == null){
+            return new CommonResponse<>(false, "The crud have not defined: " + serviceId);
         }else if(PageType.add.name().equals(page)){
-            content = new ModaldialogInfo(confData.getAdd()); 
+            content = new ModaldialogInfo(confData.getCrud().getAdd()); 
         }else if(PageType.update.name().equals(page)){
-            content = new ModaldialogInfo(confData.getUpdate());
+            content = new ModaldialogInfo(confData.getCrud().getUpdate());
             content.setValues(jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), id));
         }else if(PageType.view.name().equals(page)){
-            content = new ModaldialogInfo(confData.getView()); 
+            content = new ModaldialogInfo(confData.getCrud().getView()); 
             content.setValues(jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), id));
         }else{
             return new CommonResponse<>(false, "Wrong type: " + page);
@@ -84,10 +86,12 @@ public class CommonJpaControllor {
         ConfDataMetaData confData = adapterConfDataGetter.get(serviceId);
         if(confData == null){
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
+        }else if(confData.getCrud() == null){
+            return new CommonResponse<>(false, "The crud have not defined: " + serviceId);
         }
         CommonResponse<TablePageInfo> response = new CommonResponse<>();
         TablePageInfo table = new TablePageInfo();
-        table.setDefine(confData.getTable());
+        table.setDefine(confData.getCrud().getTable());
         Pageable pageable = new PageRequest(pageNo - 1, size);
         Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getGlobal().getClazz()), pageable, params);
         table.setPage(page);

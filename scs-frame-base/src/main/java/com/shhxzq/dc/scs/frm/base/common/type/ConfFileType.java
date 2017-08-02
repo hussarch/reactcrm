@@ -7,7 +7,7 @@ package com.shhxzq.dc.scs.frm.base.common.type;
  */
 public enum ConfFileType {
     
-    common,table,add,update,view,api,dict;
+    common,crud,api;
     
     public String getFileName(){
         return name() + ".json";

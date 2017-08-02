@@ -5,43 +5,42 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author XiaoYi
- * Created on 2017-07-16 22:10:36
+ * @author XiaoYi Created on 2017-07-16 22:10:36
  */
-public class ApiMetaData extends BaseMetaData{
-    
+public class ApiMetaData extends BaseMetaData {
+
     private String title;
     private Map<String, String> params;
-    private List<FieldMetaData> fields;
+    private List<String> fields;
     
+    public void addParamName(String name) {
+        if(params == null){
+            params = new LinkedHashMap<>();
+        }
+        params.put(name, "");
+    }
+
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
-    
-    public void addParamName(String name) {
-        if (this.params == null) {
-            this.params = new LinkedHashMap<>();
-        }
-        this.params.put(name, "");
-    }
-    
+
     public Map<String, String> getParams() {
         return params;
     }
-    
+
     public void setParams(Map<String, String> params) {
         this.params = params;
     }
-    
-    public List<FieldMetaData> getFields() {
+
+    public List<String> getFields() {
         return fields;
     }
-    
-    public void setFields(List<FieldMetaData> fields) {
+
+    public void setFields(List<String> fields) {
         this.fields = fields;
     }
 

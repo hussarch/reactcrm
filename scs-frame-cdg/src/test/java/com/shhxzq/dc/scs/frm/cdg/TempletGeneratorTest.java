@@ -2,9 +2,7 @@ package com.shhxzq.dc.scs.frm.cdg;
 
 import com.shhxzq.dc.scs.frm.base.common.type.PageType;
 import com.shhxzq.dc.scs.frm.cdf.TempletGenerator;
-import com.shhxzq.dc.scs.frm.cdf.templete.TempletDefinition;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.ApiDesc;
-import com.shhxzq.dc.scs.frm.cdf.templete.anotations.DictDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageDesc;
 import com.shhxzq.dc.scs.frm.cdf.templete.anotations.PageFieldDesc;
 import com.shhxzq.dc.scs.frm.cdg.entity.DocumentEntity;
@@ -18,7 +16,8 @@ public class TempletGeneratorTest {
 
     }
 
-    @PageDesc(path = { "website", "edu", "doc" }, name = "文档", category = "type", entityClass = DocumentEntity.class)
+    @PageDesc(path = { "website", "edu", "doc_new" }, name = "文档", category = "type", entityClass = DocumentEntity.class)
+    @PageFieldDesc(type = PageType.search, showFileds = {"title", "sourceFrom"})
     @PageFieldDesc(type = PageType.table, notShowFileds = {"content", "createdAt", "updatedAt"})
     @PageFieldDesc(type = PageType.add, notShowFileds = {"id", "createdAt", "updatedAt"})
     @PageFieldDesc(type = PageType.update, notShowFileds = {"createdAt", "updatedAt"}, hiddenFileds = "id")
@@ -31,11 +30,8 @@ public class TempletGeneratorTest {
     }
 
     public static void main(String[] args) {
-        String path = "/Users/sailor/git/adapter-data-sys/conf-data/";
-        TempletGenerator.writeTemplet(DocumentEntity.class, path, true);
-
-        String name;
-        new TempletGeneratorTest(name = "test", args, null);
+        String path = "/Users/sailor/git/adapter-data-sys/adapter-data-sys-conf-data/";
+        TempletGenerator.writeTemplet(TempletGeneratorTest.class, "defineDocumentEntity", path, false);
 
     }
 

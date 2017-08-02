@@ -1,47 +1,40 @@
 package com.shhxzq.dc.scs.frm.base.rest.model.templet;
 
+import java.util.List;
+
 /**
  * @DictMetaInfo.java
- * @author XiaoYi(hussarch@126.com)
- * Created on 2017年6月22日, ©2017 some rights reserved
+ * @author XiaoYi(hussarch@126.com) Created on 2017年6月22日, ©2017 some rights
+ *         reserved
  */
-public class DictMetaData extends BaseMetaData{
-	
-	private String key;
-	private String value;
+public class DictMetaData extends BaseMetaData {
 
-	public DictMetaData(String key, String value){
-	    this.key = key;
-	    this.value = value;
-	}
-	
-	public DictMetaData(DictData dict){
-        this.key = dict.getLabel();
-        this.value = dict.name();
+    private List<EnumDictMetaData> enumDict;
+
+    private String entityDictHql;
+
+    public List<EnumDictMetaData> getEnumDict() {
+        return enumDict;
     }
-	
-    public String getKey() {
-        return key;
+
+    public void setEnumDict(List<EnumDictMetaData> enumDict) {
+        this.enumDict = enumDict;
     }
-    
-    public void setKey(String key) {
-        this.key = key;
+
+    public String getEntityDictHql() {
+        return entityDictHql;
     }
-    
-    public String getValue() {
-        return value;
-    }
-    
-    public void setValue(String value) {
-        this.value = value;
+
+    public void setEntityDictHql(String entityDictHql) {
+        this.entityDictHql = entityDictHql;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((key == null) ? 0 : key.hashCode());
-        result = prime * result + ((value == null) ? 0 : value.hashCode());
+        result = prime * result + ((entityDictHql == null) ? 0 : entityDictHql.hashCode());
+        result = prime * result + ((enumDict == null) ? 0 : enumDict.hashCode());
         return result;
     }
 
@@ -54,22 +47,22 @@ public class DictMetaData extends BaseMetaData{
         if (getClass() != obj.getClass())
             return false;
         DictMetaData other = (DictMetaData) obj;
-        if (key == null) {
-            if (other.key != null)
+        if (entityDictHql == null) {
+            if (other.entityDictHql != null)
                 return false;
-        } else if (!key.equals(other.key))
+        } else if (!entityDictHql.equals(other.entityDictHql))
             return false;
-        if (value == null) {
-            if (other.value != null)
+        if (enumDict == null) {
+            if (other.enumDict != null)
                 return false;
-        } else if (!value.equals(other.value))
+        } else if (!enumDict.equals(other.enumDict))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "DictMetaData [key=" + key + ", value=" + value + "]";
+        return "DictMetaData [enumDict=" + enumDict + ", entityDictHql=" + entityDictHql + "]";
     }
 
 }
