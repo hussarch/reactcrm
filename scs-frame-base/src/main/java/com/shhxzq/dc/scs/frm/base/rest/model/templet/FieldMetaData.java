@@ -13,6 +13,10 @@ public class FieldMetaData extends BaseMetaData {
     private String type;
     private Integer length;
     private Boolean required;
+    
+    public FieldMetaData clone(){
+        return (FieldMetaData) super.clone();
+    }
 
     public String getLabel() {
         return label;
