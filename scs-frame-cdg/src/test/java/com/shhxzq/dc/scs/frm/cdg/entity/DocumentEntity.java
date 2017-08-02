@@ -35,7 +35,7 @@ public class DocumentEntity {
     @Comment("主键")
     private Integer id;
     
-    @Column(length = 200)
+    @Column(length = 200, nullable = false)
     @Comment("标题")
     private String title;
     

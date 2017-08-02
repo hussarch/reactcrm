@@ -226,14 +226,14 @@ public class MetaGenerater {
         data.setName(field.getName());
         data.setType(getFieldType(field));
         Column column = field.getAnnotation(Column.class);
-        if (column != null && data.getType().equals("string")) {
+        if (column != null) {
             if(StringUtils.endsWith(column.columnDefinition(), "text")){
                 data.setLength(20000);
-            }else{
+            }else if (data.getType().equals("string")){
                 data.setLength(column.length());
             }
             if(!column.nullable()){
-                data.setRequired(false);
+                data.setRequired(true);
             }
         }
         return data;
