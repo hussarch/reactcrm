@@ -6,15 +6,18 @@ import java.util.Map;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.EnumDictMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.FieldMetaData;
+
 /**
  * @author XiaoYi
  * Created on 2017-07-26 16:51:57
  */
 public interface JpaApadterService {
 
-    Page<?> getPage(Class<?> clazz, Pageable pageable, Map<String, String> params);
+    Page<?> getPage(Class<?> clazz, Pageable pageable, Map<String, String> params, List<FieldMetaData> fields);
 
-    List<?> getList(Class<?> clazz, Map<String, String> params);
+    List<?> getList(Class<?> clazz, Map<String, String> params, List<FieldMetaData> fields);
 
     Object get(Class<?> clazz, Integer id);
 
@@ -23,5 +26,7 @@ public interface JpaApadterService {
     void add(Class<?> clazz, String json);
 
     void delete(Class<?> clazz, Integer primaryKey);
+    
+    List<EnumDictMetaData> queryDictList(String sql);
 
 }

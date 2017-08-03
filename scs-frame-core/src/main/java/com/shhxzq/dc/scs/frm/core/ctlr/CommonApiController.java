@@ -94,7 +94,7 @@ public class CommonApiController {
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
         }
         Pageable pageable = new PageRequest(pageNo - 1, size);
-        Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params);
+        Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params, confData.getCommon().getFields());
         List<?> content = page.getContent();
         if (content == null || content.isEmpty()) {
             return new CommonResponse<>(true, "no result");

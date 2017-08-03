@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.EnumDictMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.FieldMetaData;
 import com.shhxzq.dc.scs.frm.core.jpa.EntityJpaService;
 import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
 
@@ -28,9 +31,6 @@ public class JpaApadterServiceImpl implements JpaApadterService{
     
     @Autowired
     private EntityJpaService entityJpaService;
-    
-    @Autowired
-    private FileTypeService fileTypeService;
     
     @Override
     public void add(Class<?> clazz, String json){
@@ -52,28 +52,42 @@ public class JpaApadterServiceImpl implements JpaApadterService{
     }
     
     @Override
-    public List<?> getList(Class<?> clazz, Map<String, String> params){
-        return entityJpaService.getList(clazz, getTypeValueParams(clazz, params));
+    public List<?> getList(Class<?> clazz, Map<String, String> params, List<FieldMetaData> fields){
+        return entityJpaService.getList(clazz, getTypeValueParams(clazz, params, fields));
     }
     
     @Override
-    public Page<?> getPage(Class<?> clazz, Pageable pageable, Map<String, String> params){
-        return entityJpaService.getPage(clazz, pageable, getTypeValueParams(clazz, params));
+    public Page<?> getPage(Class<?> clazz, Pageable pageable, Map<String, String> params, List<FieldMetaData> fields){
+        return entityJpaService.getPage(clazz, pageable, getTypeValueParams(clazz, params, fields));
     }
 
-    private Map<String, FieldTypeValue> getTypeValueParams(Class<?> clazz, Map<String, String> params) {
+    private Map<String, FieldTypeValue> getTypeValueParams(Class<?> clazz, Map<String, String> params, List<FieldMetaData> fields) {
         if(params == null || params.isEmpty()){
             return null;
         }
         Map<String, FieldTypeValue> typeValueMap = new HashMap<>();
         for(String key : params.keySet()){
-            typeValueMap.put(key, getTypeValue(clazz, key, params.get(key)));
+            typeValueMap.put(key, getTypeValue(key, fields, params.get(key)));
         }
         return typeValueMap;
     }
 
-    private FieldTypeValue getTypeValue(Class<?> clazz, String key, String value) {
-        Class<?> feildType = fileTypeService.getFiledType(clazz, key);
+    private FieldTypeValue getTypeValue(String name, List<FieldMetaData> fields, String value) {
+        String clazz = null;
+        for(FieldMetaData fmd : fields){
+            if(fmd.getName().equals(name)){
+                clazz = fmd.getClazz();
+            }
+        }
+        if(StringUtils.isBlank(clazz)){
+            throw new RuntimeException("The field " + name + " have not define");
+        }
+        Class<?> feildType;
+        try {
+            feildType = Class.forName(clazz);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Class not find: " + clazz, e);
+        }
         Object feildValue;
         if(Integer.class.equals(feildType)){
             feildValue = Integer.valueOf(value);
@@ -93,14 +107,19 @@ public class JpaApadterServiceImpl implements JpaApadterService{
         }else if(String.class.equals(feildType)){
             feildValue = value;
         }else{
-            throw new RuntimeException("Not support param type" + clazz.getName());
-        }
+            throw new RuntimeException("Not support param type" + clazz);
+        } 
         return new FieldTypeValue(feildType, feildValue);
     }
     
     @Override
     public void delete(Class<?> clazz, Integer primaryKey){
         entityJpaService.delete(clazz, primaryKey);
+    }
+
+    @Override
+    public List<EnumDictMetaData> queryDictList(String sql) {
+        return this.entityJpaService.queryDictList(sql);
     }
     
     

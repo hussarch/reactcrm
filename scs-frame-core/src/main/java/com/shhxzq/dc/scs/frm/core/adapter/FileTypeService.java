@@ -5,13 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
 
 /**
  * @author XiaoYi
  * Created on 2017-07-26 16:22:49
  */
-@Service
 public class FileTypeService {
     
     private Logger logger = Logger.getLogger(this.getClass());

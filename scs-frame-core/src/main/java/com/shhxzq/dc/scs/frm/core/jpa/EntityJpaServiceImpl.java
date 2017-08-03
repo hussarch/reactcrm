@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.EnumDictMetaData;
 import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
 
 /**
@@ -114,4 +115,9 @@ public class EntityJpaServiceImpl implements EntityJpaService{
         }
     }
     
+    @Override
+    public List<EnumDictMetaData> queryDictList(String sqlString){
+        TypedQuery<EnumDictMetaData> query = entityManager.createQuery(sqlString, EnumDictMetaData.class);
+        return query.getResultList();
+    }
 }

@@ -225,6 +225,7 @@ public class MetaGenerater {
         }
         data.setName(field.getName());
         data.setType(getFieldType(field));
+        data.setClazz(field.getType().getName());
         Column column = field.getAnnotation(Column.class);
         if (column != null) {
             if(StringUtils.endsWith(column.columnDefinition(), "text")){

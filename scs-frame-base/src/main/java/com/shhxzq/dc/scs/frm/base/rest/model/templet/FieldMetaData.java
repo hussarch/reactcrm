@@ -10,14 +10,15 @@ public class FieldMetaData extends BaseMetaData {
     private String label;
     private String name;
     private Boolean hidden;
+    private String clazz;
     private String type;
     private Integer length;
     private Boolean required;
-    
-    public FieldMetaData clone(){
-        return (FieldMetaData) super.clone();
-    }
 
+    public FieldMetaData clone(){
+        return (FieldMetaData)super.clone();
+    }
+    
     public String getLabel() {
         return label;
     }
@@ -40,6 +41,14 @@ public class FieldMetaData extends BaseMetaData {
 
     public void setHidden(Boolean hidden) {
         this.hidden = hidden;
+    }
+
+    public String getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(String clazz) {
+        this.clazz = clazz;
     }
 
     public String getType() {
@@ -70,6 +79,7 @@ public class FieldMetaData extends BaseMetaData {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((clazz == null) ? 0 : clazz.hashCode());
         result = prime * result + ((hidden == null) ? 0 : hidden.hashCode());
         result = prime * result + ((label == null) ? 0 : label.hashCode());
         result = prime * result + ((length == null) ? 0 : length.hashCode());
@@ -88,6 +98,11 @@ public class FieldMetaData extends BaseMetaData {
         if (getClass() != obj.getClass())
             return false;
         FieldMetaData other = (FieldMetaData) obj;
+        if (clazz == null) {
+            if (other.clazz != null)
+                return false;
+        } else if (!clazz.equals(other.clazz))
+            return false;
         if (hidden == null) {
             if (other.hidden != null)
                 return false;
@@ -123,8 +138,8 @@ public class FieldMetaData extends BaseMetaData {
 
     @Override
     public String toString() {
-        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", type=" + type + ", length=" + length + ", required="
-                + required + "]";
+        return "FieldMetaData [label=" + label + ", name=" + name + ", hidden=" + hidden + ", clazz=" + clazz + ", type=" + type + ", length="
+                + length + ", required=" + required + "]";
     }
 
 }
