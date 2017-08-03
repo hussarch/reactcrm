@@ -288,15 +288,21 @@ public class MetaGenerater {
         crudMetaData.setAdd(getModaldialogMetaData(PageType.add, MethodType.add, MethodType.close));
         crudMetaData.setUpdate(getModaldialogMetaData(PageType.update, MethodType.update, MethodType.close));
         crudMetaData.setView(getModaldialogMetaData(PageType.view, MethodType.close));
+        if(crudMetaData.getTable() == null && crudMetaData.getAdd() == null && crudMetaData.getUpdate() == null && crudMetaData.getView() == null){
+            return null;
+        }
         return crudMetaData;
     }
     
 
     private TableMetaData getTableMetaData() {
         TableMetaData data = new TableMetaData();
+        data.setFields(getPageFeildMetaDatas(PageType.table));
+        if(data.getFields() == null){
+            return null;
+        }
         data.setSearchFields(getPageFeildMetaDatas(PageType.search));
         data.setButtons(getButtons(MethodType.add, MethodType.update, MethodType.delete, MethodType.search));
-        data.setFields(getPageFeildMetaDatas(PageType.table));
         return data;
     }
 
@@ -325,6 +331,9 @@ public class MetaGenerater {
 
     private List<String> getPageFeildMetaDatas(PageType type) {
         PageFieldDesc pageFieldDesc = getPageFieldDesc(type);
+        if(pageFieldDesc == null){
+            return null;
+        }
         return getFeildMetaDatas(new FeildMetaFilter() {
 
             @Override
