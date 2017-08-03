@@ -87,11 +87,17 @@ public class CommonApiController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public <S> CommonResponse<Page<?>> getList(@RequestParam String serviceId, @RequestParam String name, @RequestParam int pageNo,
-            @RequestParam int size, @RequestParam(required = false) Map<String, String> params) {
+    public <S> CommonResponse<Page<?>> getList(@RequestParam String serviceId, @RequestParam String name, @RequestParam(required = false) Integer pageNo,
+            @RequestParam(required = false) Integer size, @RequestParam(required = false) Map<String, String> params) {
         ConfDataMetaData confData = adapterConfDataGetter.get(serviceId);
         if (confData == null) {
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
+        }
+        if(pageNo == null){
+            pageNo = 1;
+        }
+        if(size == null){
+            size = 20;
         }
         Pageable pageable = new PageRequest(pageNo - 1, size);
         Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params, confData.getCommon().getFields());

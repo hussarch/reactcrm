@@ -16,9 +16,6 @@ import com.shhxzq.dc.scs.frm.base.rest.model.templet.ApiMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.BaseMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
 import com.shhxzq.dc.scs.frm.base.rest.model.templet.CrudMetaData;
-import com.shhxzq.dc.scs.frm.base.rest.model.templet.DictMetaData;
-import com.shhxzq.dc.scs.frm.base.rest.model.templet.ModaldialogMetaData;
-import com.shhxzq.dc.scs.frm.base.rest.model.templet.TableMetaData;
 
 /**
  * @author XiaoYi
@@ -66,15 +63,6 @@ public class LocalAdapterConfDataGetter extends AdapterConfDataGetter{
     }
     
     private Map<String, ApiMetaData> getApiMetaData(String path, String fn, Type type){
-        String json = CommonFileUtils.readFileContent(path + "/" + fn);
-        if(json == null){
-            return null;
-        }
-        Gson gson = new Gson();
-        return gson.fromJson(json, type);
-    }
-    
-    private Map<String, DictMetaData> getDictsMetaData(String path, String fn, Type type){
         String json = CommonFileUtils.readFileContent(path + "/" + fn);
         if(json == null){
             return null;

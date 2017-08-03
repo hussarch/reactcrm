@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -69,7 +70,7 @@ public class EntityJpaServiceImpl implements EntityJpaService{
     public <T> Page<T> getPage(Class<T> clazz, Pageable pageable, Map<String, FieldTypeValue> params){
         int total = getTotalCount(clazz, params);
         if(total == 0){
-            return new PageImpl<T>(null, pageable, 0);
+            return null;
         }
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(clazz);
@@ -117,7 +118,16 @@ public class EntityJpaServiceImpl implements EntityJpaService{
     
     @Override
     public List<EnumDictMetaData> queryDictList(String sqlString){
-        TypedQuery<EnumDictMetaData> query = entityManager.createQuery(sqlString, EnumDictMetaData.class);
-        return query.getResultList();
+         Query query = entityManager.createQuery(sqlString);
+         List<?> result = query.getResultList();
+         if(result == null || result.size() == 0){
+             return null;
+         }
+         List<EnumDictMetaData> dicts = new ArrayList<>();
+         for(Object item : result){
+             Object[] array = (Object[]) item;
+             dicts.add(new EnumDictMetaData(array[0].toString(), array[1].toString()));
+         }
+        return dicts;
     }
 }

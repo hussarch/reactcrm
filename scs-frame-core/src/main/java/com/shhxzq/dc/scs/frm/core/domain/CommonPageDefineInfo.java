@@ -12,9 +12,27 @@ import com.shhxzq.dc.scs.frm.base.rest.model.templet.FieldMetaData;
  */
 public class CommonPageDefineInfo {
 
+    private String name;
+    private CategoryInfo category;
     private List<FieldMetaData> fields;
     private List<ButtonMetaData> buttons;
     private Map<String, List<EnumDictMetaData>> dicts;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CategoryInfo getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryInfo category) {
+        this.category = category;
+    }
 
     public List<FieldMetaData> getFields() {
         return fields;
@@ -42,7 +60,8 @@ public class CommonPageDefineInfo {
 
     @Override
     public String toString() {
-        return "CommonPageDefineInfo [fields=" + fields + ", buttons=" + buttons + ", dicts=" + dicts + "]";
+        return "CommonPageDefineInfo [name=" + name + ", category=" + category + ", fields=" + fields + ", buttons=" + buttons + ", dicts=" + dicts
+                + "]";
     }
 
 }
