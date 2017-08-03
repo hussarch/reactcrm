@@ -120,9 +120,10 @@ public class CommonJpaControllor {
         MethodType button = null;
         for (String bn : buttonNames) {
             for(MethodType item : MethodType.values()){
-                if(item.name().equals(bn));
-                button = item;
-                break;
+                if(item.name().equals(bn)){
+                    button = item;
+                    break;
+                }
             }
             ButtonMetaData bt = buttonMap.get(button);
             if(bt != null){
