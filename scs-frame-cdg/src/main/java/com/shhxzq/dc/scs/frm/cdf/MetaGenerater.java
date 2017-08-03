@@ -165,7 +165,7 @@ public class MetaGenerater {
         CategoryMetaData categoryMetaData = new CategoryMetaData();
         categoryMetaData.setFieldName(categoryDesc.fieldName());
         String[] group = categoryDesc.group();
-        if(group == null || group.length == 0){
+        if(group != null && group.length > 0){
             List<CategoryItemMetaData> groupList = new ArrayList<>();
             for(String item : group){
                 groupList.add(getCategoryItemMetaData(item));
