@@ -84,7 +84,7 @@ public class CommonJpaControllor {
 
     private CommonPageDefineInfo getCommonPageDefineInfo(CommonSettingMetaData common, ModaldialogMetaData data) {
         CommonPageDefineInfo define = new CommonPageDefineInfo();
-        define.setFields(getFields(define.getFields(), data.getFields(), data.getHiddenfields()));
+        define.setFields(getFields(common.getFields(), data.getFields(), data.getHiddenfields()));
         define.setDicts(getDicts(common.getDicts()));
         define.setButtons(getButtons(common.getButtons(), data.getButtons()));
         return define;
@@ -146,7 +146,7 @@ public class CommonJpaControllor {
         List<FieldMetaData> list = new ArrayList<>();
         FieldMetaData fieldMetaData;
         for (FieldMetaData fd : fields) {
-            if (showFields.contains(fd.getName())) {
+            if (showFields.contains(fd.getName()) || (hiddenfields != null && hiddenfields.contains(fd.getName()))) {
                 fieldMetaData = fd.clone();
                 if (hiddenfields != null && hiddenfields.contains(fd.getName())) {
                     fieldMetaData.setHidden(true);
