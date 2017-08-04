@@ -106,7 +106,12 @@ public class CommonJpaControllor {
             } else {
                 throw new RuntimeException("The dict define error");
             }
-            dmp.put(key, list);
+            if(list != null && list.size() > 0){
+                dmp.put(key, list);
+            }
+        }
+        if(dmp.isEmpty()){
+            return null;
         }
         return dmp;
     }

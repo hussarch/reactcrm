@@ -1,6 +1,5 @@
 package com.shhxzq.dc.scs.frm.core.domain;
 
-
 /**
  * @author XiaoYi
  * Created on 2017-07-26 17:33:09
