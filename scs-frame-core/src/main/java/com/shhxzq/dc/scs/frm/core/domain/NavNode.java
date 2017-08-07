@@ -71,8 +71,6 @@ public class NavNode implements Comparable<NavNode> {
 
     @Override
     public int compareTo(NavNode other) {
-        System.out.println(this);
-        System.out.println(other);
         return this.order - other.order;
     }
 

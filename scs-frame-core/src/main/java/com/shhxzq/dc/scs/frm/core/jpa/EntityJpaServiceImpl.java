@@ -34,7 +34,7 @@ public class EntityJpaServiceImpl implements EntityJpaService{
     private EntityManager entityManager;
     
     @Override
-    public Object get(Class<?> clazz, Integer primaryKey){
+    public <T> T get(Class<T> clazz, Integer primaryKey){
         return entityManager.find(clazz, primaryKey);
     }
     

@@ -14,7 +14,7 @@ import com.shhxzq.dc.scs.frm.core.jpa.model.FieldTypeValue;
  */
 public interface EntityJpaService {
 
-    Object get(Class<?> clazz, Integer primaryKey);
+    <T> T get(Class<T> clazz, Integer primaryKey);
 
     void add(Object entity);
 

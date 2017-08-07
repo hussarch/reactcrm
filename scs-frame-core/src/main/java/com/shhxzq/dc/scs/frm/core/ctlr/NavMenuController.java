@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shhxzq.dc.scs.frm.core.domain.CommonResponse;
 import com.shhxzq.dc.scs.frm.core.domain.NavNode;
+import com.shhxzq.dc.scs.frm.core.domain.UserInfo;
 import com.shhxzq.dc.scs.frm.core.jpa.EntityJpaService;
 import com.shhxzq.dc.scs.frm.core.jpa.entity.common.MenuEntity;
+import com.shhxzq.dc.scs.frm.core.jpa.entity.common.UserEntity;
 
 /**
  * @author XiaoYi
@@ -35,7 +37,7 @@ public class NavMenuController {
     
     @RequestMapping(value = "/nav")
     @ResponseBody
-    public CommonResponse<Map<String, Object>> getNav(@RequestParam String userId){
+    public CommonResponse<Map<String, Object>> getNav(@RequestParam Integer userId){
         CommonResponse<Map<String, Object>> response = new CommonResponse<>(); 
         Map<String, Object> navInfo = new LinkedHashMap<>();
         List<MenuEntity> list = getMenuList();
@@ -44,13 +46,15 @@ public class NavMenuController {
         }
         List<NavNode> navList = getNavList(list);
         navInfo.put("navList", navList);
-        response.setContent(navInfo);
+        
         Map<Integer, NavNode> subNavMap = this.getMenuNavNodeList(list);
         Map<Integer, List<NavNode>> menuMap = new LinkedHashMap<>();
         for(NavNode navNode : navList){
             menuMap.put(navNode.getId(), subNavMap.get(navNode.getId()).getChildren());
         }
         navInfo.put("menuMap", menuMap);
+        navInfo.put("userInfo", getUserInfo(userId));
+        response.setContent(true, navInfo);
         return response;
     }
     
@@ -105,6 +109,16 @@ public class NavMenuController {
     private List<MenuEntity> getMenuList(){
         List<MenuEntity> list = entityJpaService.getList(MenuEntity.class, null);
         return list;
+    }
+    
+    private UserInfo getUserInfo(Integer id){
+        UserEntity entity = entityJpaService.get(UserEntity.class, id);
+        UserInfo info = new UserInfo();
+        info.setId(entity.getId());
+        info.setName(entity.getName());
+        info.setRealName(entity.getRealName());
+        info.setPassword(entity.getPassword());
+        return info;
     }
     
     
