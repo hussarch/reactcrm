@@ -3,8 +3,6 @@ package com.shhxzq.dc.scs.frm.core.jpa;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.TypedQuery;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

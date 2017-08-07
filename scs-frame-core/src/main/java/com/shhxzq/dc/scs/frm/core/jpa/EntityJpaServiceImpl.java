@@ -60,7 +60,7 @@ public class EntityJpaServiceImpl implements EntityJpaService{
         Root<T> rootFrom = criteriaQuery.from(clazz);
         setWhereCondition(criteriaBuilder, criteriaQuery, rootFrom, params);
         // 默认按照id排序（从小到大）
-        //criteriaQuery.orderBy(criteriaBuilder.asc(rootFrom.get("id")));
+        criteriaQuery.orderBy(criteriaBuilder.asc(rootFrom.get("id")));
         // SQL查询对象
         TypedQuery<T> createQuery = entityManager.createQuery(criteriaQuery);
         return createQuery.getResultList();
