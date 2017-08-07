@@ -68,11 +68,19 @@ public class CommonJpaControllor {
         } else if (PageType.add.name().equals(page)) {
             content = new ModaldialogInfo(getCommonPageDefineInfo(confData.getCommon(), confData.getCrud().getAdd()));
         } else if (PageType.update.name().equals(page)) {
+            Object value = jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), id);
+            if(value == null){
+                return new CommonResponse<>(false, "Wrong id: " + id);
+            }
             content = new ModaldialogInfo(getCommonPageDefineInfo(confData.getCommon(), confData.getCrud().getUpdate()));
-            content.setValues(jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), id));
+            content.setValues(value);
         } else if (PageType.view.name().equals(page)) {
+            Object value = jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), id);
+            if(value == null){
+                return new CommonResponse<>(false, "Wrong id: " + id);
+            }
             content = new ModaldialogInfo(getCommonPageDefineInfo(confData.getCommon(), confData.getCrud().getView()));
-            content.setValues(jpaApadterService.get(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), id));
+            content.setValues(value);
         } 
         if(content == null){
             return new CommonResponse<>(false, "Wrong type: " + page);

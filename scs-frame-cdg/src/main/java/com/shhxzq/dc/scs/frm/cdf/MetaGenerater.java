@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
 import com.shhxzq.dc.scs.frm.base.common.anotations.Comment;
 import com.shhxzq.dc.scs.frm.base.common.type.MethodType;
@@ -57,12 +58,13 @@ public class MetaGenerater {
     
     public MetaGenerater(Class<?> clazz, String metodName) {
         init(clazz, metodName);
-        initButtonMetaData(MethodType.add, "确定");
-        initButtonMetaData(MethodType.update, "确定");
+        initButtonMetaData(MethodType.add, "增加");
+        initButtonMetaData(MethodType.update, "修改");
         initButtonMetaData(MethodType.delete, "删除");
         initButtonMetaData(MethodType.view, "查看");
         initButtonMetaData(MethodType.search, "查询");
-        initButtonMetaData(MethodType.close, "取消");
+        initButtonMetaData(MethodType.submit, "提交");
+        initButtonMetaData(MethodType.close, "关闭");
     }
 
     private void init(Class<?> clazz, String metodName) {
@@ -107,10 +109,10 @@ public class MetaGenerater {
         CommonSettingMetaData data = new CommonSettingMetaData();
         data.setName(name);
         data.setClazz(this.entityClass.getName());
-        data.setMainPage(pageDesc.mainPage().toString());
-        data.setRenderedJs(pageDesc.renderedJs());
         data.setCategory(categoryMetaData);
         data.setFields(entityClassFields);
+        data.setMainPage(pageDesc.mainPage().toString());
+        data.setRenderedJs(pageDesc.renderedJs());
         data.setButtons(this.buttonMap);
         data.setDicts(getDicts());
         return data;
@@ -197,7 +199,7 @@ public class MetaGenerater {
     
     private List<FieldMetaData> getAllFields() {
         List<FieldMetaData> list = new ArrayList<>();
-        Field[] fields = this.entityClass.getDeclaredFields();
+        List<Field> fields = FieldUtils.getAllFieldsList(this.entityClass);
         FieldMetaData data = null;
         for (Field field : fields) {
             data = this.getFieldMetaData(field);

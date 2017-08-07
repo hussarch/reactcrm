@@ -87,8 +87,9 @@ public class CommonApiController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public <S> CommonResponse<Page<?>> getList(@RequestParam String serviceId, @RequestParam String name, @RequestParam(required = false) Integer pageNo,
-            @RequestParam(required = false) Integer size, @RequestParam(required = false) Map<String, String> params) {
+    public <S> CommonResponse<Page<?>> getList( @RequestParam Map<String, String> params, @RequestParam(required = false) Integer pageNo,
+            @RequestParam(required = false) Integer size) {
+        String serviceId = params.remove("serviceId");
         ConfDataMetaData confData = adapterConfDataGetter.get(serviceId);
         if (confData == null) {
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
@@ -99,6 +100,12 @@ public class CommonApiController {
         if(size == null){
             size = 20;
         }
+        String name = params.remove("name");
+        if(confData.getApis() == null || !confData.getApis().containsKey(name)){
+            return new CommonResponse<>(false, "Wrong api name : " + name);
+        }
+        ApiMetaData apiDefine = confData.getApis().get(name);
+        
         Pageable pageable = new PageRequest(pageNo - 1, size);
         Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params, confData.getCommon().getFields());
         List<?> content = page.getContent();
@@ -106,7 +113,6 @@ public class CommonApiController {
             return new CommonResponse<>(true, "no result");
         }
         Gson gson = new Gson();
-        ApiMetaData apiDefine = confData.getApis().get(name);
         page.map(new Converter<Object, JsonObject>() {
 
             @Override

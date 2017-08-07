@@ -9,6 +9,6 @@ package com.shhxzq.dc.scs.frm.base.common.type;
  */
 public enum MethodType {
     
-    add,update,delete,view,search,close
+    add,update,delete,view,search,close,submit
     
 }

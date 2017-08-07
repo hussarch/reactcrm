@@ -1,9 +1,14 @@
 package com.shhxzq.dc.scs.frm.cdf;
 
 import java.io.File;
+import java.util.Map;
 
 import com.shhxzq.dc.scs.frm.base.common.type.ConfFileType;
+import com.shhxzq.dc.scs.frm.base.common.type.MethodType;
 import com.shhxzq.dc.scs.frm.base.common.utils.CommonFileUtils;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.ApiMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CommonSettingMetaData;
+import com.shhxzq.dc.scs.frm.base.rest.model.templet.CrudMetaData;
 
 /**
  * @author XiaoYi
@@ -23,9 +28,28 @@ public class TempletGenerator {
                 return;
             }
         }
-        CommonFileUtils.writeJson2File(entity2Meta.getConfMetaData(), path, ConfFileType.common.getFileName(), overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getCrudMetaData(), path, ConfFileType.crud.getFileName(), overWrite);
-        CommonFileUtils.writeJson2File(entity2Meta.getApiMetaData(), path, ConfFileType.api.getFileName(), overWrite);
+        CommonSettingMetaData confMetaData = entity2Meta.getConfMetaData();
+        Map<String, ApiMetaData> apiMetaData = entity2Meta.getApiMetaData();
+        CrudMetaData crudMetaData = entity2Meta.getCrudMetaData();
+        if(crudMetaData == null){
+            confMetaData.setMainPage(null);
+            confMetaData.setRenderedJs(null);
+            confMetaData.setButtons(null);
+        }else{
+            if(crudMetaData.getAdd() == null && crudMetaData.getUpdate() == null){
+                confMetaData.getButtons().remove(MethodType.submit);
+            }
+            if(crudMetaData.getTable() == null || crudMetaData.getView() == null){
+                confMetaData.getButtons().remove(MethodType.add);
+                confMetaData.getButtons().remove(MethodType.update);
+                confMetaData.getButtons().remove(MethodType.search);
+                confMetaData.getButtons().remove(MethodType.delete);
+                confMetaData.getButtons().remove(MethodType.view);
+            }
+        }
+        CommonFileUtils.writeJson2File(confMetaData, path, ConfFileType.common.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(crudMetaData, path, ConfFileType.crud.getFileName(), overWrite);
+        CommonFileUtils.writeJson2File(apiMetaData, path, ConfFileType.api.getFileName(), overWrite);
     }
     
     
