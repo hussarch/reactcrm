@@ -47,8 +47,8 @@ public class NavMenuController {
         List<NavNode> navList = getNavList(list);
         navInfo.put("navList", navList);
         
-        Map<Integer, NavNode> subNavMap = this.getMenuNavNodeList(list);
-        Map<Integer, List<NavNode>> menuMap = new LinkedHashMap<>();
+        Map<String, NavNode> subNavMap = this.getMenuNavNodeList(list);
+        Map<String, List<NavNode>> menuMap = new LinkedHashMap<>();
         for(NavNode navNode : navList){
             menuMap.put(navNode.getId(), subNavMap.get(navNode.getId()).getChildren());
         }
@@ -72,8 +72,8 @@ public class NavMenuController {
         return navNodes;
     }
     
-    private Map<Integer, NavNode> getMenuNavNodeList(List<MenuEntity> list){
-        Map<Integer, NavNode> allNavNodeMap = new HashMap<>();
+    private Map<String, NavNode> getMenuNavNodeList(List<MenuEntity> list){
+        Map<String, NavNode> allNavNodeMap = new HashMap<>();
         NavNode item;
         NavNode parent;
         Map<Integer, MenuEntity> entityMap = new HashMap<>();
@@ -86,7 +86,7 @@ public class NavMenuController {
                 allNavNodeMap.put(item.getId(), item);
             }
             if(entity.getParent() != null && entityMap.containsKey(entity.getParent().getId())){
-                parent = allNavNodeMap.get(entity.getParent().getId());
+                parent = allNavNodeMap.get(entity.getParent().getId().toString());
                 if(parent == null){
                     parent = getNavNode(entity.getParent());
                     allNavNodeMap.put(parent.getId(), parent);
@@ -99,7 +99,7 @@ public class NavMenuController {
     
     private NavNode getNavNode(MenuEntity menu) {
         NavNode navNode = new NavNode();
-        navNode.setId(menu.getId());
+        navNode.setId(menu.getId().toString());
         navNode.setName(menu.getName());
         navNode.setTargetUrl(menu.getTargetUrl());
         navNode.setOrder(menu.getOrder());
