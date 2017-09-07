@@ -8,7 +8,7 @@ public class CommonResponse<T>{
     
     public Boolean success;
     
-    private T content;
+    private T value;
     
     private String msg;
     
@@ -19,8 +19,8 @@ public class CommonResponse<T>{
         this.setMsg(success, msg);
     }
     
-    public CommonResponse(boolean success, T content){
-        this.setContent(success, content);
+    public CommonResponse(boolean success, T value){
+        this.setValue(success, value);
     }
     
     public Boolean getSuccess() {
@@ -32,17 +32,17 @@ public class CommonResponse<T>{
         this.success = success;
     }
     
-    public T getContent() {
-        return content;
+    public T getValue() {
+        return value;
     }
     
-    public void setContent(boolean success, T content) {
+    public void setValue(boolean success, T value) {
         this.success = success;
-        this.content = content;
+        this.value = value;
     }
     
-    public void setContent(T content) {
-        this.content = content;
+    public void setValue(T value) {
+        this.value = value;
     }
 
     

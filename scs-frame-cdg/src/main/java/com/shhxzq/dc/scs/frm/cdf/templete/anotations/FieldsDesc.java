@@ -15,6 +15,7 @@ import com.shhxzq.dc.scs.frm.base.common.type.PageType;
  */
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME) 
+@Deprecated
 public @interface FieldsDesc {
     
     String label();

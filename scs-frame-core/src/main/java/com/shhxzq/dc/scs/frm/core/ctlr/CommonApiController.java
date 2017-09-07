@@ -1,9 +1,11 @@
 package com.shhxzq.dc.scs.frm.core.ctlr;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.converter.Converter;
@@ -57,20 +59,21 @@ public class CommonApiController {
         }
         Gson gson = new Gson();
         ApiMetaData apiDefine = apis.get(name);
-        return new CommonResponse<JsonObject>(true, getFilteredValue(gson, apiDefine, value));
+        return new CommonResponse<Map<String, String>>(true, getFilteredValue(gson, apiDefine, value));
     }
 
-    private JsonObject getFilteredValue(Gson gson, ApiMetaData apiDefine, Object value) {
+    private Map<String, String> getFilteredValue(Gson gson, ApiMetaData apiDefine, Object value) {
         JsonObject jsonTree = (JsonObject) gson.toJsonTree(value);
         Iterator<String> it = jsonTree.keySet().iterator();
         String key;
+        Map<String, String> map = new HashMap<String, String>();
         while (it.hasNext()) {
             key = it.next();
-            if (!isShow(key, apiDefine.getFields())) {
-                it.remove();
+            if (isShow(key, apiDefine.getFields())) {
+                map.put(key, jsonTree.get(key).getAsString());
             }
         }
-        return jsonTree;
+        return map;
     }
 
     private boolean isShow(String key, List<String> fields) {
@@ -87,16 +90,17 @@ public class CommonApiController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public <S> CommonResponse<Page<?>> getList( @RequestParam Map<String, String> params, @RequestParam(required = false) Integer pageNo,
-            @RequestParam(required = false) Integer size) {
+    public <S> CommonResponse<Page<?>> getList( @RequestParam Map<String, String> params) {
         String serviceId = params.remove("serviceId");
         ConfDataMetaData confData = adapterConfDataGetter.get(serviceId);
         if (confData == null) {
             return new CommonResponse<>(false, "Wrong serviceId: " + serviceId);
         }
+        Integer pageNo = NumberUtils.createInteger(params.remove("pageNo"));
         if(pageNo == null){
             pageNo = 1;
         }
+        Integer size = NumberUtils.createInteger(params.remove("size"));
         if(size == null){
             size = 20;
         }
@@ -113,10 +117,10 @@ public class CommonApiController {
             return new CommonResponse<>(true, "no result");
         }
         Gson gson = new Gson();
-        page.map(new Converter<Object, JsonObject>() {
+        page = page.map(new Converter<Object, Map<String, String>>() {
 
             @Override
-            public JsonObject convert(Object source) {
+            public Map<String, String> convert(Object source) {
                 return getFilteredValue(gson, apiDefine, source);
             }
             

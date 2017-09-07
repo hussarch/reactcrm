@@ -208,7 +208,7 @@ public class CommonJpaControllor {
         Page<?> page = jpaApadterService.getPage(adapterConfDataGetter.getEntityClass(confData.getCommon().getClazz()), pageable, params,
                 confData.getCommon().getFields());
         table.setPage(page);
-        response.setContent(true, table);
+        response.setValue(true, table);
         return response;
     }
     

@@ -54,7 +54,7 @@ public class NavMenuController {
         }
         navInfo.put("menuMap", menuMap);
         navInfo.put("userInfo", getUserInfo(userId));
-        response.setContent(true, navInfo);
+        response.setValue(true, navInfo);
         return response;
     }
     
