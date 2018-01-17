@@ -3,11 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.shhxzq.dc.scs</groupId>
+    <groupId>com.hussar.dc.scs</groupId>
     <artifactId>scs-frame</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.shhxzq.dc.scs</groupId>
+  <groupId>com.hussar.dc.scs</groupId>
   <artifactId>scs-frame-core</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>scs-frame-core</name>
@@ -23,7 +23,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-    	<groupId>com.shhxzq.dc.scs</groupId>
+    	<groupId>com.hussar.dc.scs</groupId>
     	<artifactId>scs-frame-cdcache</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>

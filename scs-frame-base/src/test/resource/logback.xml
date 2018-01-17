@@ -36,11 +36,11 @@
 	</appender>
 	
 	
-	<logger name="com.shhxzq.hxmanager" level="DEBUG" additivity="false">
+	<logger name="com.hussar.hxmanager" level="DEBUG" additivity="false">
 		<appender-ref ref="file" />
 	</logger>
 	
-	<logger name="com.shhxzq.hxmanager.frame.proxy" level="INFO" additivity="false">
+	<logger name="com.hussar.hxmanager.frame.proxy" level="INFO" additivity="false">
         <appender-ref ref="not_critical" />
     </logger>
 	
@@ -61,7 +61,7 @@
 		<appender-ref ref="file" />
 	</logger>
 	
-	<logger name="com.shhxzq.hxmanager" level="INFO" >
+	<logger name="com.hussar.hxmanager" level="INFO" >
 		<appender-ref ref="console" />
 	 </logger>
 	
